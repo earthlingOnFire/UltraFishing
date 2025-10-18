@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.AddressableAssets;
-using System.Linq;
 using System.IO;
 using System;
 
@@ -45,6 +43,9 @@ public static class GlobalFishManager {
       "assets/bundles/fishingstuff/fishes/nan fish.asset", // NaN
       "assets/bundles/fishingstuff/fishes/ancient fish.asset", // Ancient Fish
       "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
+      "assets/bundles/fishingstuff/fishes/wine fish.asset", // Wine Fish
+      "assets/bundles/fishingstuff/fishes/vapor fish.asset", // Vapor Fish
+      "assets/bundles/fishingstuff/fishes/wire shark.asset", // Wire Shark
     };
 
     fishes = new FishObject[defaultFishes.Length + customFishes.Length];
@@ -75,6 +76,9 @@ public static class GlobalFishManager {
     switch (fish.fishName) {
       case "Wise Fish":
         fish.customPickup.gameObject.AddComponent<BookRandomizer>();
+        break;
+      case "Wine Fish":
+        fish.worldObject.transform.Find("Liquid").gameObject.AddComponent<Liquid>();
         break;
     }
     return fish;

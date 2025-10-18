@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-using System.IO;
-using System.Text.RegularExpressions;
 using Steamworks;
 
 namespace UltraFishing;

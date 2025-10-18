@@ -6,8 +6,8 @@ namespace UltraFishing;
 public class GlobalFishEncyclopedia : FishEncyclopedia {
   private int currentPage;
 
-	public void StartEncyclopedia() {
-		fishButtonTemplate.gameObject.SetActive(value: false);
+  public void StartEncyclopedia() {
+    fishButtonTemplate.gameObject.SetActive(value: false);
     for (int i = 0; i < GlobalFishManager.FishCount(); i++) {
       FishObject fish = GlobalFishManager.GetFish(i);
       bool value = GlobalFishManager.GetFishValue(i);
@@ -24,8 +24,8 @@ public class GlobalFishEncyclopedia : FishEncyclopedia {
       });
     }
 
-		FishManager instance = FishManager.Instance;
-		instance.onFishUnlocked = (Action<FishObject>)Delegate.Combine(instance.onFishUnlocked, new Action<FishObject>(OnFishUnlocked));
+    FishManager instance = FishManager.Instance;
+    instance.onFishUnlocked = (Action<FishObject>)Delegate.Combine(instance.onFishUnlocked, new Action<FishObject>(OnFishUnlocked));
 
     currentPage = 1;
     DisplayCurrentPage();

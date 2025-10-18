@@ -11,13 +11,13 @@ public class NewFishingRod : FishingRodWeapon {
   }
 
   public new void FishCaughtAndGrabbed() {
-		animator.SetTrigger(Idle);
-		FishingHUD.Instance.ShowFishCaught(show: true, hookedFishe.fish);
-		NewFishingRod.CreateFishPickup(fishPickupTemplate, hookedFishe.fish, grab: true);
-		ResetFishing();
+    animator.SetTrigger(Idle);
+    FishingHUD.Instance.ShowFishCaught(show: true, hookedFishe.fish);
+    NewFishingRod.CreateFishPickup(fishPickupTemplate, hookedFishe.fish, grab: true);
+    ResetFishing();
   }
 
-	public static new GameObject CreateFishPickup(ItemIdentifier template, FishObject fish, bool grab, bool unlock = true) {
+  public static new GameObject CreateFishPickup(ItemIdentifier template, FishObject fish, bool grab, bool unlock = true) {
     if (unlock) {
       FishManager.Instance.UnlockFish(fish);
     }
