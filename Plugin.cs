@@ -15,6 +15,7 @@ using System.Linq;
 using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine.XR;
+using System.Runtime.CompilerServices;
 
 namespace UltraFishing;
 
@@ -32,34 +33,30 @@ public class Plugin : BaseUnityPlugin {
   public static GameObject baitConsumedSound;
   public static GameObject terminal;
   private static Shader MainShader;
+  public static readonly string[] NoRodLevels = [ "Level 1-S" ];
 
   private void Awake() {
-    Plugin.MainShader = Fetch<Shader>("Assets/Shaders/MasterShader/ULTRAKILL-Standard.shader");
+    MainShader = Addressables.LoadAssetAsync<Shader>("Assets/Shaders/MasterShader/ULTRAKILL-Standard.shader").WaitForCompletion();
 
     gameObject.hideFlags = HideFlags.HideAndDontSave;
-    Plugin.logger = Logger;
-  }
-
-  public static Type Fetch<Type>(string name) {
-    return Addressables.LoadAssetAsync<Type>((object)name).WaitForCompletion();
+    logger = Logger;
   }
 
   public static void ReplaceShader(Material mat, Shader shader) {
-    if ((UnityEngine.Object)(object)mat == (UnityEngine.Object)null || (UnityEngine.Object)(object)mat.shader == (UnityEngine.Object)null) {
-      return;
-    }
+    if (mat == null || mat.shader == null)  return;
+
     int renderQueue = mat.renderQueue;
     Shader shader2 = mat.shader;
-    if ((UnityEngine.Object)(object)Shader.Find(((UnityEngine.Object)shader2).name) != (UnityEngine.Object)null) {
-      if (((UnityEngine.Object)mat.shader).name != "Standard") {
-        mat.shader = Shader.Find(((UnityEngine.Object)shader2).name);
+    if (Shader.Find(shader2.name) != null) {
+      if (mat.shader.name != "Standard") {
+        mat.shader = Shader.Find(shader2.name);
       }
       else {
         mat.shader = shader;
       }
       mat.renderQueue = renderQueue;
     }
-    else if (((UnityEngine.Object)shader2).name == ((UnityEngine.Object)shader).name) {
+    else if (shader2.name == shader.name) {
       mat.shader = shader;
       mat.renderQueue = renderQueue;
     }
@@ -70,15 +67,16 @@ public class Plugin : BaseUnityPlugin {
 
   public static void ReplaceAssets() {
 
-    List<Material> list = new List<Material>();
-    Dictionary<string, AudioMixer> dictionary = new Dictionary<string, AudioMixer>();
-    dictionary["AllAudio"] = Addressables.LoadAssetAsync<AudioMixer>((object)"AllAudio").WaitForCompletion();
-    dictionary["DoorAudio"] = Addressables.LoadAssetAsync<AudioMixer>((object)"DoorAudio").WaitForCompletion();
-    dictionary["GoreAudio"] = Addressables.LoadAssetAsync<AudioMixer>((object)"GoreAudio").WaitForCompletion();
-    dictionary["MusicAudio"] = Addressables.LoadAssetAsync<AudioMixer>((object)"MusicAudio").WaitForCompletion();
-    dictionary["UnfreezeableAudio"] = Addressables.LoadAssetAsync<AudioMixer>((object)"UnfreezeableAudio").WaitForCompletion();
+    List<Material> Materials = [];
+    Dictionary<string, AudioMixer> Sounds = [];
+    void Add(string name) => Sounds.Add(name, Addressables.LoadAssetAsync<AudioMixer>(name).WaitForCompletion());
+    Add("AllAudio");
+    Add("DoorAudio");
+    Add("GoreAudio");
+    Add("MusicAudio");
+    Add("UnfreezeableAudio");
     
-    List<GameObject> gameObjects = bundle.LoadAllAssets<GameObject>().ToList();
+    List<GameObject> gameObjects = [.. bundle.LoadAllAssets<GameObject>()];
 
     FishObject[] customFishes = bundle.LoadAllAssets<FishObject>();
     for (int i = 0; i < customFishes.Length; i++) {
@@ -93,9 +91,8 @@ public class Plugin : BaseUnityPlugin {
       if (val.GetComponentsInChildren<AudioSource>(true) != null) {
         AudioSource[] componentsInChildren = val.GetComponentsInChildren<AudioSource>(true);
         foreach (AudioSource val2 in componentsInChildren) {
-          if ((UnityEngine.Object)(object)val2.outputAudioMixerGroup != (UnityEngine.Object)null && dictionary.TryGetValue(((UnityEngine.Object)val2.outputAudioMixerGroup.audioMixer).name, out var value)) {
+          if (val2.outputAudioMixerGroup != null && Sounds.TryGetValue(val2.outputAudioMixerGroup.audioMixer.name, out var value))
             val2.outputAudioMixerGroup.audioMixer.outputAudioMixerGroup = value.FindMatchingGroups("Master").FirstOrDefault();
-          }
         }
       }
 
@@ -103,13 +100,13 @@ public class Plugin : BaseUnityPlugin {
       if (val.GetComponentsInChildren<Renderer>(true) != null) {
         Renderer[] componentsInChildren2 = val.GetComponentsInChildren<Renderer>(true);
         foreach (Renderer val3 in componentsInChildren2) {
-          if ((UnityEngine.Object)(object)val3.sharedMaterial != (UnityEngine.Object)null) {
+          if (val3.sharedMaterial != null) {
             ReplaceShader(val3.sharedMaterial, MainShader);
           }
           if (val3.sharedMaterials != null && val3.sharedMaterials.Length != 0) {
             sharedMaterials = val3.sharedMaterials;
             foreach (Material val4 in sharedMaterials) {
-              list.Add(val4);
+              Materials.Add(val4);
               ReplaceShader(val4, MainShader);
             }
           }
@@ -120,13 +117,13 @@ public class Plugin : BaseUnityPlugin {
       }
       ParticleSystemRenderer[] componentsInChildren3 = val.GetComponentsInChildren<ParticleSystemRenderer>(true);
       foreach (ParticleSystemRenderer val5 in componentsInChildren3) {
-        if ((UnityEngine.Object)(object)((Renderer)val5).sharedMaterial != (UnityEngine.Object)null) {
-          ReplaceShader(((Renderer)val5).sharedMaterial, MainShader);
+        if (val5.sharedMaterial != null) {
+          ReplaceShader(val5.sharedMaterial, MainShader);
         }
-        if (((Renderer)val5).sharedMaterials != null && ((Renderer)val5).sharedMaterials.Length != 0) {
-          sharedMaterials = ((Renderer)val5).sharedMaterials;
+        if (val5.sharedMaterials != null && val5.sharedMaterials.Length != 0) {
+          sharedMaterials = val5.sharedMaterials;
           foreach (Material val6 in sharedMaterials) {
-            list.Add(val6);
+            Materials.Add(val6);
             ReplaceShader(val6, MainShader);
           }
         }
@@ -134,8 +131,8 @@ public class Plugin : BaseUnityPlugin {
     }
     sharedMaterials = bundle.LoadAllAssets<Material>();
     foreach (Material val7 in sharedMaterials) {
-      if (!list.Contains(val7)) {
-        list.Add(val7);
+      if (!Materials.Contains(val7)) {
+        Materials.Add(val7);
         ReplaceShader(val7, MainShader);
       }
     }
@@ -152,14 +149,14 @@ public class Plugin : BaseUnityPlugin {
 
     new Harmony(PLUGIN_GUID).PatchAll();
 
-    Plugin.logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
+    logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
   }
 
   private void LoadBundle() {
     string bundlePath = Path.Combine(modDir, "fishingstuff.fishbundle");
     bundle = AssetBundle.LoadFromFile(bundlePath);
     if (bundle == null) {
-      Plugin.logger.LogError("Bundle could not be loaded");
+      logger.LogError("Bundle could not be loaded");
     }
   }
 
@@ -175,9 +172,9 @@ public class Plugin : BaseUnityPlugin {
 
     if (bundle != null) {
       WeaponIcon rodIcon = fishingRod.AddComponent<WeaponIcon>();
-      rodIcon.weaponDescriptor = Plugin.bundle.LoadAsset<WeaponDescriptor>("assets/bundles/fishingstuff/rod descriptor.asset");
+      rodIcon.weaponDescriptor = bundle.LoadAsset<WeaponDescriptor>("assets/bundles/fishingstuff/rod descriptor.asset");
 
-      terminal = Plugin.bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/fishing enc terminal.prefab");
+      terminal = bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/fishing enc terminal.prefab");
     }
   }
 }
@@ -188,7 +185,7 @@ public static class Patches {
   [HarmonyPostfix]
   [HarmonyPatch(typeof(GunControl), "Start")]
   private static void GunControl_Start_Postfix() {
-    if (Object.FindObjectOfType<FishingHUD>() != null) return;
+    if (Object.FindObjectOfType<FishingHUD>() != null || Plugin.NoRodLevels.Contains(SceneHelper.CurrentScene)) return;
 
     GameObject fishManagerObj = new GameObject("FishManager");
     fishManagerObj.SetActive(value: false);
