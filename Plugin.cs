@@ -465,7 +465,13 @@ public static class Patches {
             .SetUp("Meat", Color.red);
         }
         break;
-      case "Level 0-5":
+            case "Level 0-3":
+                WaterBuilder.SetWater("9 - Windtunnel/9 Nonstuff/Shaft/Pit/")
+                  .AddFish("Wire Shark")
+                  .SetUp("Maintnence Shaft", Color.yellow);
+
+                break;
+            case "Level 0-5":
         WaterBuilder.SetWater("2 - Lava Foundry/Lava/", 0)
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);

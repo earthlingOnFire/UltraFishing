@@ -1,16 +1,30 @@
+using BepInEx.Logging;
 using UnityEngine;
 
 namespace  UltraFishing;
 
 public class NewFishingRod : FishingRodWeapon {
   private static FakeWater currentFakeWater; 
+  private static GameObject customsplash;
 
-  public void OnDisable() {
+    public void OnDisable() {
     ResetFishing();
     FishingHUD.Instance.SetState(FishingRodState.ReadyToThrow);
   }
 
-  public new void FishCaughtAndGrabbed() {
+    new public void ThrowBaitEvent()
+    {
+        if (this.spawnedBaitCon == null)
+        {
+            this.spawnedBaitCon = Object.Instantiate<FishBait>(this.baitPrefab, this.rodTip.position, Quaternion.identity, this.rodTip);
+            this.spawnedBaitCon.landed = false;
+            if (customsplash != null) { this.spawnedBaitCon.splashPrefab = customsplash; }
+            this.spawnedBaitCon.splashPrefab = customsplash;
+            this.spawnedBaitCon.ThrowStart(this.targetingCircle.transform.position, this.rodTip, this);
+        }
+    }
+
+    public new void FishCaughtAndGrabbed() {
     animator.SetTrigger(Idle);
     FishingHUD.Instance.ShowFishCaught(show: true, hookedFishe.fish);
     NewFishingRod.CreateFishPickup(fishPickupTemplate, hookedFishe.fish, grab: true);
@@ -117,7 +131,10 @@ public class NewFishingRod : FishingRodWeapon {
               }
             }
             else if (hitInfo.collider.TryGetComponent<FakeWater>(out var fwcomponent) && (bool)fwcomponent.fishDB) {
-              currentFishPool = fwcomponent.fishDB;
+
+                            customsplash = fwcomponent.CustomSplash;
+                            
+                            currentFishPool = fwcomponent.fishDB;
               currentFakeWater = fwcomponent;
               flag = true;
               if ((bool)fwcomponent.overrideFishingPoint) {
@@ -169,8 +186,9 @@ public class NewFishingRod : FishingRodWeapon {
         if (!baitThrown) {
           baitThrown = true;
           animator.SetTrigger(FishingRodWeapon.Throw);
-        }
-        if ((bool)spawnedBaitCon && spawnedBaitCon.landed) {
+
+                }
+                if ((bool)spawnedBaitCon && spawnedBaitCon.landed) {
           state = FishingRodState.WaitingForFish;
           timeSinceBaitInWater = 0f;
           distanceAfterThrow = Vector3.Distance(NewMovement.Instance.transform.position, spawnedBaitCon.baitPoint.position);

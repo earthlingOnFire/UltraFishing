@@ -10,6 +10,8 @@ public class FakeWater : MonoBehaviour {
 
 	public FishObject[] attractFish;
 
+	public GameObject CustomSplash;
+
   public void SetupFishDB(FishDB fishDB) {
 		if (fishDB.fishGhostPrefab != null) {
 			Bounds bounds = this.GetComponent<Collider>().bounds;
