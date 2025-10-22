@@ -12,14 +12,13 @@ public class NewFishingRod : FishingRodWeapon {
     FishingHUD.Instance.SetState(FishingRodState.ReadyToThrow);
   }
 
-    new public void ThrowBaitEvent()
+    public new void ThrowBaitEvent()
     {
         if (this.spawnedBaitCon == null)
         {
             this.spawnedBaitCon = Object.Instantiate<FishBait>(this.baitPrefab, this.rodTip.position, Quaternion.identity, this.rodTip);
             this.spawnedBaitCon.landed = false;
             if (customsplash != null) { this.spawnedBaitCon.splashPrefab = customsplash; }
-            this.spawnedBaitCon.splashPrefab = customsplash;
             this.spawnedBaitCon.ThrowStart(this.targetingCircle.transform.position, this.rodTip, this);
         }
     }

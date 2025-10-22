@@ -257,7 +257,21 @@ public static class Patches {
     return true;
   }
 
-  [HarmonyPrefix]
+
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(FishingRodWeapon), "ThrowBaitEvent")]
+    private static bool FishingRodWeapon_ThrowBaitEvent_Prefix(FishingRodWeapon __instance)
+    {
+        if (__instance is NewFishingRod)
+        {
+            NewFishingRod newRod = (NewFishingRod)__instance;
+            newRod.ThrowBaitEvent();
+            return false;
+        }
+        return true;
+    }
+
+    [HarmonyPrefix]
   [HarmonyPatch(typeof(FishingRodWeapon), "FishCaughtAndGrabbed")]
   private static bool FishingRodWeapon_FishCaughtAndGrabbed_Prefix(FishingRodWeapon __instance) {
     if (__instance is NewFishingRod) {
