@@ -327,24 +327,18 @@ public static class Patches {
           .SetUp("Fountain", Color.cyan);
         break;
       case "Level 1-2":
-
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("5 - Double Hallway/5 Nonstuff/Floor/").transform.GetChild(8).gameObject)
+        WaterBuilder.SetWater("5 - Double Hallway/5 Nonstuff/Floor/", 8)
           .AddFish("null")
           .SetUp("Castle Water", Color.magenta);
-
         //sewer?
-
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("3 - Stairs Room/3 Nonstuff/Floor/").transform.GetChild(7).gameObject)
+        WaterBuilder.SetWater("3 - Stairs Room/3 Nonstuff/Floor/", 7)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
-
-
         foreach (Transform objects in GenericHelper.FindGameObject("7 - Castle Entrance/7 Nonstuff/Sewer/Water").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Nil")
             .SetUp("Castle Water", Color.magenta);
         }
-
         WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Sewer/GreenWater")
           .AddFish("Cancerous Fish")
           .SetUp("Cancerous Water", Color.green);
@@ -353,20 +347,16 @@ public static class Patches {
           .SetUp("Lava", Color.red);
         break;
       case "Level 1-3":
-
-        //water
         foreach (Transform objects in GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Nil")
             .SetUp("Castle Water", Color.magenta);
         }
-
         foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Nil")
             .SetUp("Castle Water", Color.magenta);
         }
-
         foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Nil")
@@ -382,20 +372,18 @@ public static class Patches {
             .AddFish("Nil")
             .SetUp("Castle Water", Color.magenta);
         }
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("B2-A Water Hallway/B2-A Nonstuff/Floor/").transform.GetChild(5).gameObject)
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 5)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("B2-A Water Hallway/B2-A Nonstuff/Floor/").transform.GetChild(6).gameObject)
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 6)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("B2-A Water Hallway/B2-A Nonstuff/Floor/").transform.GetChild(7).gameObject)
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 7)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater(GenericHelper.FindGameObject("S - Secret Fight/S Nonstuff/Water/Cube/"))
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
-        //waterend
-
         WaterBuilder.SetWater("R2 - Second Arena/R2 Nonstuff/Lava")
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
@@ -406,18 +394,15 @@ public static class Patches {
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
         break;
-
       case "Level 1-4":
         WaterBuilder.SetWater("V2 - Arena/V2 Nonstuff/Floor/Water/")
           .AddFish("NaN")
           .SetUp("Pond", Color.magenta);
         WaterBuilder.SetWater("2 - Bridge/2 Nonstuff/Start Side/Plane/")
           .AddFish("NaN")
+          .AddBoxCollider()
           .SetUp("Pond", Color.magenta);
-        BoxCollider col = GenericHelper.FindGameObject("2 - Bridge/2 Nonstuff/Start Side/Plane/").gameObject.AddComponent<BoxCollider>();
-        col.isTrigger = true;
         break;
-
       case "Level 2-3":
         WaterBuilder.SetWater("1 - Main Hall/1 Nonstuff/Water/", 3)
           .AddFish("Koi Fish")
@@ -458,9 +443,6 @@ public static class Patches {
           .AddFish("Melted Fish")
           .SetUp("Acid", Color.green);
         break;
-        //do something in 4-1 (pool of water beginning, lava later)
-        //do something in 4-3 pool of water
-        //4-4 chamber of the feline and the rodent
       case "Level 4-2":
         for (int i = 0; i < 7; i++) {
           WaterBuilder.SetWater("Dunes", i)
@@ -469,8 +451,6 @@ public static class Patches {
         }
         break;
       case "Level 4-1":
-
-
         foreach (Transform objects in GenericHelper.FindGameObject("6 - Staircase Arena/6 Nonstuff/Pit/Lava/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Overcooked Fish")
@@ -498,7 +478,7 @@ public static class Patches {
         }
         break;
       case "Level 4-4":
-        WaterBuilder.CreateWater("8 - Outro/8 Stuff/Landing (Broken) (1)")
+        WaterBuilder.SetWater("8 - Outro/8 Stuff/Landing (Broken) (1)")
           .SetPosition(1065, 255, 692)
           .SetLocalScale(9, 0, 9)
           .AddFish("Eyeball")
@@ -515,13 +495,13 @@ public static class Patches {
           .AddFish("Coin")
           .SetUp("Sand", Color.yellow);
 
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("5 - Window Hallway/Floor/").transform.GetChild(5).gameObject)
+        WaterBuilder.SetWater("5 - Window Hallway/Floor/", 5)
           .AddFish("Ancient Fish")
           .SetUp("Pond", Color.cyan);
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("5 - Window Hallway/Floor/").transform.GetChild(6).gameObject)
+        WaterBuilder.SetWater("5 - Window Hallway/Floor/", 6)
           .AddFish("Ancient Fish")
           .SetUp("Pond", Color.cyan);
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("3 - Ground Floor/Secret Hall/SuperSecretActivator/"))
+        WaterBuilder.SetWater("3 - Ground Floor/Secret Hall/SuperSecretActivator/")
           .AddFish("Ancient Fish")
           .SetUp("Pond", Color.cyan);
         break;
@@ -673,10 +653,8 @@ public static class Patches {
           .SetUp("Lava", Color.red);
         WaterBuilder.SetWater("4 - Bridge/4 Nonstuff/4 Unburned/Plane/")
           .AddFish("NaN")
+          .AddBoxCollider()
           .SetUp("Glitchy Pond", Color.magenta);
-
-        BoxCollider coll = GenericHelper.FindGameObject("4 - Bridge/4 Nonstuff/4 Unburned/Plane/").gameObject.AddComponent<BoxCollider>();
-        coll.isTrigger = true;
         break;
     }
   }
