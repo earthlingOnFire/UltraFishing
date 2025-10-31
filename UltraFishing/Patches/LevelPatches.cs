@@ -1,14 +1,12 @@
 using HarmonyLib;
 using UnityEngine;
-using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using TMPro;
 using System.Linq;
 
 namespace UltraFishing;
 
 [HarmonyPatch]
-public static class Patches {
+public static class LevelPatches {
 
   [HarmonyPostfix]
   [HarmonyPatch(typeof(GunControl), "Start")]
@@ -27,159 +25,6 @@ public static class Patches {
     AddWeapon(5, Plugin.fishingRod);
 
     LoadFishTerminal();
-  }
-
-  [HarmonyPostfix]
-  [HarmonyPatch(typeof(FishManager), "UnlockFish")]
-  private static void FishManager_UnlockFish_Postfix(ref FishObject fish) {
-    GlobalFishManager.UnlockFish(fish);
-  }
-  
-  [HarmonyPrefix]
-  [HarmonyPatch(typeof(FishingRodWeapon), "Awake")]
-  private static bool FishingRodWeapon_Awake_Prefix(FishingRodWeapon __instance) {
-    if (__instance is NewFishingRod) {
-      return true;
-    }
-
-    FishingRodWeapon rod = __instance;
-    GameObject gameObject = rod.gameObject;
-    gameObject.SetActive(false);
-    NewFishingRod newRod = gameObject.AddComponent<NewFishingRod>();
-
-    newRod.animator = rod.animator;
-    newRod.targetPrefab = rod.targetPrefab;
-    newRod.baitPrefab = rod.baitPrefab;
-    newRod.rodTip = rod.rodTip;
-    newRod.fishPickupTemplate = rod.fishPickupTemplate;
-    newRod.pullSound = rod.pullSound;
-    newRod.targetingCircle = rod.targetingCircle;
-    newRod.spawnedBaitCon = rod.spawnedBaitCon;
-    newRod.state = rod.state;
-    newRod.selectedPower = rod.selectedPower;
-    newRod.climaxed = rod.climaxed;
-    newRod.baitThrown = rod.baitThrown;
-    newRod.distanceAfterThrow = rod.distanceAfterThrow;
-    newRod.fishHooked = rod.fishHooked;
-    newRod.currentFishPool = rod.currentFishPool;
-    newRod.currentWater = rod.currentWater;
-    newRod.hookedFishe = rod.hookedFishe;
-    newRod.fishTolerance = rod.fishTolerance;
-    newRod.fishDesirePosition = rod.fishDesirePosition;
-    newRod.playerProvidedPosition = rod.playerProvidedPosition;
-    newRod.playerPositionVelocity = rod.playerPositionVelocity;
-    newRod.timeSinceBaitInWater = rod.timeSinceBaitInWater;
-    newRod.timeSinceAction = rod.timeSinceAction;
-    newRod.noFishErrorDisplayed = rod.noFishErrorDisplayed;
-    gameObject.GetComponentInChildren<FishingRodAnimEvents>().weapon = newRod;
-
-    Object.Destroy(rod);
-    gameObject.SetActive(true);
-
-    return false;
-  }
-
-  [HarmonyPrefix]
-  [HarmonyPatch(typeof(FishingRodWeapon), "Update")]
-  private static bool FishingRodWeapon_Update_Prefix(FishingRodWeapon __instance) {
-    if (__instance is NewFishingRod) {
-      NewFishingRod newRod = (NewFishingRod)__instance;
-      newRod.NewUpdate();
-      return false;
-    }
-    return true;
-  }
-
-  [HarmonyPrefix]
-  [HarmonyPatch(typeof(FishingRodWeapon), "FishCaughtAndGrabbed")]
-  private static bool FishingRodWeapon_FishCaughtAndGrabbed_Prefix(FishingRodWeapon __instance) {
-    if (__instance is NewFishingRod) {
-      NewFishingRod newRod = (NewFishingRod)__instance;
-      newRod.FishCaughtAndGrabbed();
-      return false;
-    }
-    return true;
-  }
-
-  [HarmonyPrefix]
-  [HarmonyPatch(typeof(FishEncyclopedia), "Start")]
-  private static bool FishEncyclopedia_Start_Prefix(FishEncyclopedia __instance) {
-    if (__instance is GlobalFishEncyclopedia) {
-      GlobalFishEncyclopedia globalFishEncyclopedia = (GlobalFishEncyclopedia)__instance;
-      globalFishEncyclopedia.StartEncyclopedia();
-      return false;
-    }
-    FishEncyclopedia enc = __instance;
-    GameObject gameObject = enc.gameObject;
-    GlobalFishEncyclopedia newEnc = gameObject.AddComponent<GlobalFishEncyclopedia>();
-
-    newEnc.fishPicker = enc.fishPicker;
-    newEnc.fishInfoContainer = enc.fishInfoContainer;
-    newEnc.fishName = enc.fishName;
-    newEnc.fishDescription = enc.fishDescription;
-    newEnc.fishGrid = enc.fishGrid;
-    newEnc.fishButtonTemplate = enc.fishButtonTemplate;
-    newEnc.fish3dRenderContainer = enc.fish3dRenderContainer;
-    newEnc.fishButtons  = enc.fishButtons;
-
-    Transform backButton = newEnc.fishInfoContainer.transform.Find("Window/Back Button");
-
-    GameObject previousButton = Object.Instantiate(backButton.gameObject, newEnc.fishPicker.transform.parent);
-    previousButton.name = "Previous Button";
-    previousButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "<<";
-    previousButton.transform.localScale = new Vector3(1.4f, 1.4f, 1);
-    previousButton.transform.position += Vector3.down * 0.0425f;  
-    previousButton.GetComponent<Button>().onClick.AddListener(delegate {
-      newEnc.PreviousPage();
-    });
-
-    GameObject nextButton = Object.Instantiate(backButton.gameObject, newEnc.fishPicker.transform.parent);
-    previousButton.name = "Next Button";
-    nextButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ">>";
-    nextButton.transform.localScale = previousButton.transform.localScale;
-    if (SceneHelper.CurrentScene.Contains("construct") || SceneHelper.CurrentScene.Contains("5-S")) {
-      nextButton.transform.position = previousButton.transform.position + Vector3.left * 0.8313f;
-    }
-    else {
-      nextButton.transform.position = previousButton.transform.position + Vector3.right * 0.8313f;
-    }
-    nextButton.GetComponent<Button>().onClick.AddListener(delegate {
-      newEnc.NextPage();
-    });
-    newEnc.fishInfoContainer.transform.SetAsLastSibling();
-
-    backButton.GetComponent<ShopButton>().toActivate = new GameObject[]{ newEnc.fishPicker };
-
-    Object.Destroy(enc);
-
-    return false;
-  }
-
-  [HarmonyPostfix]
-  [HarmonyPatch(typeof(ItemIdentifier), "PutDown")]
-  private static void ItemIdentifier_PutDown_Postfix(ItemIdentifier __instance) {
-    FishObjectReference fishRef = __instance.GetComponent<FishObjectReference>();
-    if (fishRef == null) return;
-    FishObject fish = fishRef.fishObject;
-    switch (fish.fishName) {
-      case "Coin":
-        GameObject coin = __instance.transform.Find("Coin").gameObject;
-        Camera cam = CameraController.Instance.GetComponent<Camera>();
-        GameObject camObj = cam.gameObject;
-        GunControl gc = GunControl.Instance;
-        FistControl fc = FistControl.Instance;
-
-        fc.currentPunch.CoinFlip();
-
-        GameObject obj = GameObject.Instantiate(coin, camObj.transform.position + camObj.transform.up * -0.5f, camObj.transform.rotation);
-        obj.SetActive(true);
-        obj.GetComponent<Coin>().sourceWeapon = gc.currentWeapon;
-        MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.CoinToss);
-        obj.GetComponent<Rigidbody>().AddForce(camObj.transform.forward * 20f + Vector3.up * 15f + MonoSingleton<PlayerTracker>.Instance.GetPlayerVelocity(trueVelocity: true), ForceMode.VelocityChange);
-
-       GameObject.Destroy(__instance.gameObject);
-        break;
-    }
   }
 
   private static void LoadFishTerminal() {
