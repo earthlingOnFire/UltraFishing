@@ -87,28 +87,6 @@ public class WaterBuilder {
     return SetWater(gameObject);
   }
 
-  public static WaterBuilder CreateWater() { // creates FAKE water
-    GameObject water = new GameObject("fakewater", typeof(FakeWater));
-    
-    BoxCollider collider = water.AddComponent<UnityEngine.BoxCollider>();
-    collider.isTrigger = true;
-
-    return new WaterBuilder(water.GetComponent<FakeWater>());
-  }
-
-  public static WaterBuilder CreateWater(string parentPath) { // creates FAKE water
-    WaterBuilder waterBuilder = CreateWater();
-    GameObject water = waterBuilder.gameObject;
-
-    GameObject parent = GenericHelper.FindGameObject(parentPath);
-    if (parent != null) {
-      water.transform.SetParent(parent.transform);
-      water.transform.localPosition = Vector3.zero;
-    }
-
-    return waterBuilder;
-  }
-
   public WaterBuilder SetPosition(float x, float y, float z) {
     gameObject.transform.position = new Vector3(x, y, z);
 
@@ -155,6 +133,17 @@ public class WaterBuilder {
       MeshCollider col = gameObject.AddComponent<MeshCollider>();
       if (isTrigger) {
         col.convex = true;
+        col.isTrigger = true;
+      }
+    }
+
+    return this;
+  }
+
+  public WaterBuilder AddBoxCollider(bool isTrigger = true) {
+    if (gameObject != null) {
+      BoxCollider col = gameObject.AddComponent<BoxCollider>();
+      if (isTrigger) {
         col.isTrigger = true;
       }
     }
