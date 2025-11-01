@@ -76,6 +76,17 @@ public static class ComponentReplacementPatches {
     return true;
   }
 
+  [HarmonyPrefix]
+  [HarmonyPatch(typeof(FishingRodWeapon), "ThrowBaitEvent")]
+  private static bool FishingRodWeapon_ThrowBaitEvent_Prefix(FishingRodWeapon __instance) {
+    if (__instance is NewFishingRod) {
+      NewFishingRod newRod = (NewFishingRod)__instance;
+      newRod.ThrowBaitEvent();
+      return false;
+    }
+    return true;
+  }
+
   // Replace FishEncyclopedia with GlobalFishEncyclopedia
   [HarmonyPrefix]
   [HarmonyPatch(typeof(FishEncyclopedia), "Start")]

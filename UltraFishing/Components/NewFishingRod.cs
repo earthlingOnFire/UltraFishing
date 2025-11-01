@@ -17,6 +17,19 @@ public class NewFishingRod : FishingRodWeapon {
     ResetFishing();
   }
 
+  public new void ThrowBaitEvent() {
+    if (this.spawnedBaitCon == null) {
+      this.spawnedBaitCon = Object.Instantiate<FishBait>(this.baitPrefab, this.rodTip.position, Quaternion.identity, this.rodTip);
+      this.spawnedBaitCon.landed = false;
+
+      if (currentFakeWater != null && currentFakeWater.customSplash != null) {
+        this.spawnedBaitCon.splashPrefab = currentFakeWater.customSplash;
+      }
+
+      this.spawnedBaitCon.ThrowStart(this.targetingCircle.transform.position, this.rodTip, this);
+    }
+  }
+
   public static new GameObject CreateFishPickup(ItemIdentifier template, FishObject fish, bool grab, bool unlock = true) {
     if (unlock) {
       FishManager.Instance.UnlockFish(fish);
