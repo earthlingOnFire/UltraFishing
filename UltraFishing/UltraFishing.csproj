@@ -31,7 +31,7 @@
       <HintPath>lib\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\ULTRAKILL\ULTRAKILL_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ResourceManagement">
       <HintPath>lib\Unity.ResourceManager.dll</HintPath>
