@@ -146,6 +146,7 @@ public static class LevelPatches {
       case "Level 0-3":
         WaterBuilder.SetWater("9 - Windtunnel/9 Nonstuff/Shaft/Pit/")
           .AddFish("Wire Shark")
+          .SetSplash("Electricity")
           .SetUp("Maintnence Shaft", Color.yellow);
         break;
       case "Level 0-5":
@@ -297,6 +298,7 @@ public static class LevelPatches {
         for (int i = 0; i < 7; i++) {
           WaterBuilder.SetWater("Dunes", i)
             .AddFish("Coin")
+            .SetSplash("Sand")
             .SetUp("Sand", Color.yellow);
         }
         break;
@@ -335,14 +337,17 @@ public static class LevelPatches {
           .SetUp("\"V2\"", Color.red);
         WaterBuilder.SetWater("8 - Outro/8 Nonstuff/Untilted (Outro)/Cube(Clone) (1)/")
           .AddFish("Coin")
+          .SetSplash("Sand")
           .SetUp("Sand", Color.yellow);
         foreach (Transform objects in GenericHelper.FindGameObject("3 - Ground Floor/Hallway/Sands/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Coin")
+            .SetSplash("Sand")
             .SetUp("Sand", Color.yellow);
         }
         WaterBuilder.SetWater("3 - Ground Floor/Sand Hall/Sand/")
           .AddFish("Coin")
+          .SetSplash("Sand")
           .SetUp("Sand", Color.yellow);
 
         WaterBuilder.SetWater("5 - Window Hallway/Floor/", 5)

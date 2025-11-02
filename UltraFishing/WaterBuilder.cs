@@ -1,5 +1,6 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.Collections.Generic;
 
 namespace UltraFishing;
 
@@ -10,6 +11,8 @@ public class WaterBuilder {
   private Water water;
   private FishDB fishDB;
   private GameObject gameObject;
+
+  public static Dictionary<string, GameObject> customSplashes = new Dictionary<string, GameObject>();
 
   public WaterBuilder(Water water) {
     this.gameObject = water.gameObject;
@@ -179,6 +182,22 @@ public class WaterBuilder {
     if (fishDB == null) fishDB = FishHelper.GetFishDB(null);
     fishDB.symbolColor = color;
     
+    return this;
+  }
+
+  public WaterBuilder SetSplash(string splashName) {
+    if (WaterBuilder.customSplashes.ContainsKey(splashName)) {
+      if (fakeWater != null) {
+        fakeWater.customSplash = WaterBuilder.customSplashes[splashName];
+      }
+      else {
+        Plugin.logger.LogError("Custom splash could not be added. No FakeWater found.");
+      }
+    }
+    else {
+      Plugin.logger.LogError($"No splash named {splashName} found.");
+    }
+
     return this;
   }
 

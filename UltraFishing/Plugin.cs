@@ -167,6 +167,13 @@ public class Plugin : BaseUnityPlugin {
       rodIcon.weaponDescriptor = bundle.LoadAsset<WeaponDescriptor>("assets/bundles/fishingstuff/rod descriptor.asset");
 
       terminal = bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/fishing enc terminal.prefab");
+
+      string[] splashes = {
+        "assets/bundles/fishingstuff/splashes/Electricity_FishingBaitSplash1.prefab",
+        "assets/bundles/fishingstuff/splashes/Sand_FishingBaitSplash.prefab",
+      };
+      WaterBuilder.customSplashes.Add("Electricity", bundle.LoadAsset<GameObject>(splashes[0]));
+      WaterBuilder.customSplashes.Add("Sand", bundle.LoadAsset<GameObject>(splashes[1]));
     }
   }
 }
