@@ -90,12 +90,38 @@ public class WaterBuilder {
     return SetWater(gameObject);
   }
 
+  // Creates new GameObject with a FakeWater component and a BoxCollider
+  public static WaterBuilder CreateWater() { 
+    GameObject water = new GameObject("fakewater", typeof(FakeWater));
+
+    BoxCollider collider = water.AddComponent<UnityEngine.BoxCollider>();
+    collider.isTrigger = true;
+
+    return new WaterBuilder(water.GetComponent<FakeWater>());
+  }
+
+  // Creates new GameObject with a FakeWater component and a BoxCollider
+  public static WaterBuilder CreateWater(string parentPath) { 
+    WaterBuilder waterBuilder = CreateWater();
+    GameObject water = waterBuilder.gameObject;
+
+    GameObject parent = GenericHelper.FindGameObject(parentPath);
+    if (parent != null) {
+      water.transform.SetParent(parent.transform);
+      water.transform.localPosition = Vector3.zero;
+    }
+
+    return waterBuilder;
+  }
+
+  // Should only be used with CreateWater.
   public WaterBuilder SetPosition(float x, float y, float z) {
     gameObject.transform.position = new Vector3(x, y, z);
 
     return this;
   }
 
+  // Should only be used with CreateWater.
   public WaterBuilder SetLocalScale(float x, float y, float z) {
     gameObject.transform.localScale = new Vector3(x, y, z);
 
