@@ -458,7 +458,7 @@ public static class LevelPatches {
           .AddFish("Wise Fish")
           .SetUp("Depths Of The Library", Color.gray);
         WaterBuilder.SetWater("7-S_Unpaintable/Exterior/The Water Ups_Todo/The Water Ups/Water Ups Ocean")
-          .AddFish("\"size 2\"", GlobalFishManager.CanCatchSize2())
+          .AddFish("\"size 2\"", GlobalFishManager.Size2Chance())
           .AddMeshCollider(false)
           .SetUp("The Water Ups", Color.blue);
         break;

@@ -1,15 +1,25 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using System.Collections.Generic;
 using System.IO;
-using System;
 
 namespace UltraFishing;
 
 public static class GlobalFishManager {
-  private static FishObject[] fishes;
-  private static bool[] foundFishes;
+
+  private static Dictionary<string, FishData> fishes = new Dictionary<string, FishData>();
+  private static List<FishCollection> collections = new List<FishCollection>();
+
+  public static void RegisterCollection(FishCollection collection) {
+    collections.Add(collection);
+    foreach (FishData fishData in collection.fishes) {
+      fishes.Add(fishData.fish.fishName, fishData);
+    }
+  }
 
   public static void Start() {
+    string savePath = Path.Combine(Plugin.modDir, "fish.save");
+
     string[] defaultFishes = {
       "Assets/Data/Fishing/Fishes/Funny Stupid Fish.asset", //Funny Stupid Fish (Friend)
       "Assets/Data/Fishing/Fishes/pitr fish.asset", //PITR Fish
@@ -24,7 +34,7 @@ public static class GlobalFishManager {
       "Assets/Data/Fishing/Fishes/Cooked Fish.asset", //Cooked Fish
       "Assets/Data/Fishing/Fishes/Shark.asset", //Shark
     };
-    string[] customFishes = {
+    string[] customFishesPage1 = {
       "assets/bundles/fishingstuff/fishes/filth fish.asset", // Filthy Screaming Fish (Filsh)
       "assets/bundles/fishingstuff/fishes/missing fish.asset", // null
       "assets/bundles/fishingstuff/fishes/cancer fish.asset", // Cancerous Fish
@@ -37,39 +47,48 @@ public static class GlobalFishManager {
       "assets/bundles/fishingstuff/fishes/frozen fish.asset", // Frozen Fish
       "assets/bundles/fishingstuff/fishes/coin fish.asset", // Coin
       "assets/bundles/fishingstuff/fishes/book fish.asset", // Wise Fish
-      "assets/bundles/fishingstuff/fishes/png fish.asset", // "size 2"
-      "assets/bundles/fishingstuff/fishes/mannequin fish.asset", // Mannequin Fish
-      "assets/bundles/fishingstuff/fishes/nil fish.asset", // Nil
-      "assets/bundles/fishingstuff/fishes/nan fish.asset", // NaN
-      "assets/bundles/fishingstuff/fishes/ancient fish.asset", // Ancient Fish
-      "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
-      "assets/bundles/fishingstuff/fishes/wine fish.asset", // Wine Fish
-      "assets/bundles/fishingstuff/fishes/vapor fish.asset", // Vapor Fish
-      "assets/bundles/fishingstuff/fishes/wire shark.asset", // Wire Shark
     };
 
-    fishes = new FishObject[defaultFishes.Length + customFishes.Length];
-    foundFishes = new bool[fishes.Length];
-    for (int i = 0; i < defaultFishes.Length; i++) {
-      fishes[i] = Addressables.LoadAssetAsync<FishObject>(defaultFishes[i]).WaitForCompletion();
-      foundFishes[i] = false;
-    }
-    for (int i = 0; i < customFishes.Length; i++) {
-      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishes[i]);
-      fishes[i + defaultFishes.Length] = PrepareFish(fish);
-      foundFishes[i + defaultFishes.Length] = false;
-    }
-    
+    string[] customFishesPage2 = {
+      "assets/bundles/fishingstuff/fishes/wire shark.asset", // Wire Shark
+      "assets/bundles/fishingstuff/fishes/nil fish.asset", // Nil
+      "assets/bundles/fishingstuff/fishes/nan fish.asset", // NaN
+      "assets/bundles/fishingstuff/fishes/vapor fish.asset", // Vapor Fish
+      "assets/bundles/fishingstuff/fishes/ancient fish.asset", // Ancient Fish
+      "assets/bundles/fishingstuff/fishes/wine fish.asset", // Wine Fish
+      "assets/bundles/fishingstuff/fishes/mannequin fish.asset", // Mannequin Fish
+      "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
+    };
 
-    string savePath = Path.Combine(Plugin.modDir, "fish.save");
-    if (File.Exists(savePath)) {
-      byte[] saveData = File.ReadAllBytes(savePath);
-      for (int i = 0; i < saveData.Length; i++) {
-        if (saveData[i] == 1) {
-          foundFishes[i] = true;
-        }
-      }
+    string size2 = "assets/bundles/fishingstuff/fishes/png fish.asset"; // "size 2"
+
+    FishCollection defaultCollection = new FishCollection("ULTRAKILL");
+    for (int i = 0; i < defaultFishes.Length; i++) {
+      FishObject fish = Addressables.LoadAssetAsync<FishObject>(defaultFishes[i]).WaitForCompletion();
+      defaultCollection.RegisterFish(fish, savePath, i);
     }
+
+    FishCollection ultrafishingCollection = new FishCollection("ULTRAFISHING");
+    for (int i = 0; i < customFishesPage1.Length; i++) {
+      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishesPage1[i]);
+      int saveSlot = i + defaultFishes.Length;
+      ultrafishingCollection.RegisterFish(PrepareFish(fish), savePath, saveSlot);
+    }
+
+    for (int i = 0; i < customFishesPage2.Length; i++) {
+      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishesPage2[i]);
+      int saveSlot = i + defaultFishes.Length + customFishesPage1.Length + 1;
+      ultrafishingCollection.RegisterFish(PrepareFish(fish), savePath, saveSlot);
+    }
+
+    FishCollection size2Collection = new FishCollection("???");
+    FishObject size2Fish = Plugin.bundle.LoadAsset<FishObject>(size2);
+    int size2SaveSlot = defaultFishes.Length + customFishesPage1.Length;
+    size2Collection.RegisterFish(size2Fish, savePath, size2SaveSlot);
+
+    RegisterCollection(defaultCollection);
+    RegisterCollection(ultrafishingCollection);
+    RegisterCollection(size2Collection);
   }
 
   private static FishObject PrepareFish(FishObject fish) {
@@ -85,40 +104,28 @@ public static class GlobalFishManager {
   }
 
   public static void UnlockFish(FishObject fish) {
-    int fishIndex = Array.FindIndex(fishes, f => f == fish);
-    if (fishIndex == -1) {
+    if (!fishes.ContainsKey(fish.fishName)) {
       Plugin.logger.LogError($"Fish {fish.fishName} could not be found!");
       return;
     }
+
     Plugin.logger.LogInfo($"Fish {fish.fishName} was found!");
-    if (foundFishes[fishIndex] != true) {
-      foundFishes[fishIndex] = true;
-      WriteToSaveFile();
-      UpdateSize2();
-    }
-  }
+    FishData fishData = fishes[fish.fishName];
 
-  public static int FishCount() {
-    return fishes.Length;
-  }
-
-  public static FishObject GetFish(int index) {
-    return fishes[index];
+    fishData.Unlock();
+    UpdateSize2();
   }
 
   public static FishObject GetFish(string fishName) {
-    return Array.Find(fishes, fish => fish.fishName == fishName);
-  }
-
-  public static bool GetFishValue(int index) {
-    return foundFishes[index];
+    return fishes[fishName].fish;
   }
 
   public static bool FoundFish(FishObject fish) {
-    int fishIndex = Array.FindIndex(fishes, f => f == fish);
-    if (fishIndex == -1) return false;
+    return fishes[fish.fishName].found;
+  }
 
-    return GetFishValue(fishIndex);
+  public static FishCollection[] GetFishCollections() {
+    return collections.ToArray();
   }
 
   public static string GetFishDescription(FishObject fish) {
@@ -144,31 +151,13 @@ The waterfall conceals the water UPS. Agnes Gorge Trail. Use your ability and fu
     }
   }
 
-  private static void WriteToSaveFile() {
-    string savePath = Path.Combine(Plugin.modDir, "fish.save");
-    byte[] saveData = new byte[foundFishes.Length];
-
-    for (int i = 0; i < foundFishes.Length; i++) {
-      if (foundFishes[i] == true) {
-        saveData[i] = 1;
-      }
-      else {
-        saveData[i] = 0;
-      }
-    }
-
-    File.WriteAllBytes(savePath, saveData);
-  }
-
-  public static int CanCatchSize2() {
-    for (int i = 0; i < foundFishes.Length - 1; i++) {
-      if (foundFishes[i] != true) return 0;
-    }
-    return 1;
+  public static int Size2Chance() {
+    if (collections[0].FoundAll() && collections[1].FoundAll()) return 1;
+    else return 0;
   }
 
   public static void UpdateSize2() {
-    if (SceneHelper.CurrentScene == "Level 7-S" && CanCatchSize2() == 1) {
+    if (SceneHelper.CurrentScene == "Level 7-S" && Size2Chance() == 1) {
       string path = "7-S_Unpaintable/Exterior/The Water Ups_Todo/The Water Ups/Water Ups Ocean";
       GameObject waterUpsOcean = GenericHelper.FindGameObject(path);
       if (waterUpsOcean == null) return;
