@@ -17,7 +17,7 @@ public static class SaveHelper {
 
     byte[] newData = new byte[newLength];
     for (int i = 0; i < newLength; i++) {
-      saveData[i] = i switch {
+      newData[i] = i switch {
         _ when (i == saveSlot) => value,
         _ when (i < saveData.Length) => saveData[i],
         _ => 0,
