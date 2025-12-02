@@ -254,12 +254,12 @@ public static class LevelPatches {
           .AddBoxCollider()
           .SetUp("Pond", Color.magenta);
         break;
-            case "Level 2-2":
-                WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
-                  .AddFish("Vapor Fish")
-                  .SetUp("Strean", Color.cyan);
-                break;
-            case "Level 2-3":
+      case "Level 2-2":
+        WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
+          .AddFish("Vapor Fish")
+          .SetUp("Strean", Color.cyan);
+        break;
+      case "Level 2-3":
         WaterBuilder.SetWater("1 - Main Hall/1 Nonstuff/Water/", 3)
           .AddFish("Koi Fish")
           .SetUp("Pond", Color.magenta);
@@ -396,12 +396,12 @@ public static class LevelPatches {
           .AddBait("3 - Ferryman's Cabin/3 Nonstuff/Interior/Book with Stand/Book", "Nerd Shark")
           .SetUp("The Ocean Styx", Color.blue);
         break;
-            case "Level 5-3":
-                WaterBuilder.SetWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/Cube/")
-                  .AddFish("Wine Fish")
-                  .SetUp("The Ocean Styx", new Color(146, 70, 120));
-                break;
-            case "Level 5-4":
+      case "Level 5-3":
+        WaterBuilder.SetWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/Cube/")
+          .AddFish("Wine Fish")
+          .SetUp("The Ocean Styx", new Color(146, 70, 120));
+        break;
+      case "Level 5-4":
         WaterBuilder.SetWater("Surface/Stuff/Watersurface/Cube")
           .AddFish("Eel (?)")
           .SetUp("The Ocean Styx", Color.blue);
@@ -446,15 +446,15 @@ public static class LevelPatches {
           .AddFish("Bomb Fish")
           .SetUp("The River Phlegethon", Color.black);
         break;
-            case "Level 7-3":
-                WaterBuilder.SetWater("3 - Central Plaza/3 Nonstuff/Tree Area/Cube/")
-                  .AddFish("Tasty Fish")
-                  .SetUp("Blood Tree Roots", Color.red);
-                WaterBuilder.SetWater("Outdoors Areas/Geometry/9/Floor/Cube/")
-              .AddFish("Tasty Fish")
-              .SetUp("Blood-Stained Grass", Color.red);
-                break;
-            case "Level 7-4":
+      case "Level 7-3":
+        WaterBuilder.SetWater("3 - Central Plaza/3 Nonstuff/Tree Area/Cube/")
+          .AddFish("Tasty Fish")
+          .SetUp("Blood Tree Roots", Color.red);
+        WaterBuilder.SetWater("Outdoors Areas/Geometry/9/Floor/Cube/")
+          .AddFish("Tasty Fish")
+          .SetUp("Blood-Stained Grass", Color.red);
+        break;
+      case "Level 7-4":
         WaterBuilder.SetWater("Main/Interior/InteriorStuff/BoilingBlood")
           .AddFish("Melted Fish")
           .SetUp("Earthmover Insides", Color.black);
