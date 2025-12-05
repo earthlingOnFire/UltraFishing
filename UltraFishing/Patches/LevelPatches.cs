@@ -108,7 +108,7 @@ public static class LevelPatches {
           .AddFish("Shark")
           .SetUp("Aquarium", Color.cyan);
         WaterBuilder.SetWater("__Room_Courtyard/__Level Geo/Water Fountain/Water fountain_water_1")
-          .AddFish("Mannequin Fish")
+          .AddFish("Coin")
           .SetUp("Fountain", Color.cyan);
         WaterBuilder.SetWater("__Room_FrontDesk_1/__Level geo/Cube (3)")
           .AddFish("Wise Fish")
@@ -144,10 +144,16 @@ public static class LevelPatches {
         }
         break;
       case "Level 0-3":
-        WaterBuilder.SetWater("9 - Windtunnel/9 Nonstuff/Shaft/Pit/")
-          .AddFish("Wire Shark")
-          .SetSplash("Electricity")
-          .SetUp("Maintnence Shaft", Color.yellow);
+        GameObject wires = Plugin.bundle.LoadAsset<GameObject>(
+            "assets/bundles/fishingstuff/level prefabs/Fishspots1.prefab"
+        );
+        GameObject wiresClone = Object.Instantiate(wires);
+        for (int i = 0; i < wiresClone.transform.childCount; i++) {
+          WaterBuilder.SetWater(wiresClone.transform.GetChild(i).gameObject)
+            .AddFish("Wire Shark")
+            .SetSplash("Electricity")
+            .SetUp("Wire", Color.yellow);
+        }
         break;
       case "Level 0-5":
         WaterBuilder.SetWater("2 - Lava Foundry/Lava/", 0)
@@ -253,6 +259,15 @@ public static class LevelPatches {
           .AddFish("NaN")
           .AddBoxCollider()
           .SetUp("Pond", Color.magenta);
+        break;
+      case "Level 2-1":
+        GameObject hankFisher = Plugin.bundle.LoadAsset<GameObject>(
+            "assets/bundles/fishingstuff/level prefabs/hankfisher 1.prefab"
+        );
+        GameObject hankFisherClone = Object.Instantiate(hankFisher);
+        WaterBuilder.SetWater(hankFisherClone.transform.Find("Fishpoint").gameObject)
+          .AddFish("Flying Demon Fish")
+          .SetUp("Lust Skyline", Color.magenta);
         break;
       case "Level 2-2":
         WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
