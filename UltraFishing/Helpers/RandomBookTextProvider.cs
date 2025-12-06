@@ -387,6 +387,19 @@ But what I found was not glory. It was something terrifying. There is no size 2.
 
 <color="red><b>K E E P   F I S H I N G
 """",
+""""
+Fishers
+
+        The first contact was bound to happen. The seas, let alone the oceans was simply too big for just a singular species to develop intelligence in. Any delay in contact only meant a heightening of the eventual culture shock. In fishmanity’s case, this “culture shock” meant the <i>complete extinction</i> of fishkind as it had come to be known.
+
+        Almost a billion years old, the alien species known as Fishers were oceanic nomads,traveling from one spiral arm to another in epoc-spanning migrations. During theirtravels they constantly improved and changed themselves until they became masters ofgenetic and nanotechnological manipulation. With this ability to control the material world, they assumed a religious, self-imposed mission to <i>“remake the oceans as they saw fit.”</i> Powerful as gods, Fishers saw themselves as the divine harbingers of the future.
+
+        This dogma was rooted in what had been a benevolent attempt to protect the race from its own power. However, blind, unquestioning obedience had made monsters of the Fishers.
+
+        To them fishmanity, with all of its relative glories, was nothing more than a transmutable subject. Within less than a thousand years, every fish pond was destroyed, depopulated or even worse; changed. Despite the fervent rearmament, the colonies could achieve nothing against its billion-year-old foes, save for a few flashes of ephemeral resistance.
+
+        fishmanity, once the ruler of the oceans, was now extinct. However, fish were not.
+"""",
 $""""
 This is the story about a fisher named <color=orange>{GenericHelper.GetSteamName()}</color>.
 

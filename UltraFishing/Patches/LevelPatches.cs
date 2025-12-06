@@ -148,12 +148,14 @@ public static class LevelPatches {
             "assets/bundles/fishingstuff/level prefabs/Fishspots1.prefab"
         );
         GameObject wiresClone = Object.Instantiate(wires);
-        for (int i = 0; i < wiresClone.transform.childCount; i++) {
-          WaterBuilder.SetWater(wiresClone.transform.GetChild(i).gameObject)
+        foreach (Transform child in wiresClone.transform) {
+          WaterBuilder.SetWater(child.gameObject)
             .AddFish("Wire Shark")
             .SetSplash("Electricity")
             .SetUp("Wire", Color.yellow);
+          child.gameObject.GetComponent<FakeWater>().overrideFishingPoint = child.GetChild(0);
         }
+
         break;
       case "Level 0-5":
         WaterBuilder.SetWater("2 - Lava Foundry/Lava/", 0)
