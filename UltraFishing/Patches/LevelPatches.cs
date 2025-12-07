@@ -275,7 +275,7 @@ public static class LevelPatches {
         WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
           .AddFish("Vapor Fish")
           .SetUp("Stream", Color.cyan);
-                for (int i = 0; i <= GenericHelper.FindGameObject("5 - Second District/5 Nonstuff/Water/Colliders").transform.childCount; i++)
+                for (int i = 0; i < GenericHelper.FindGameObject("5 - Second District/5 Nonstuff/Water/Colliders").transform.childCount; i++)
                 {
                     if (i >1 && i<6)
                     {
