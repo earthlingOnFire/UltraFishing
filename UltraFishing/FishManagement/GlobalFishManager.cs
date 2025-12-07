@@ -60,6 +60,7 @@ public static class GlobalFishManager {
       "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
       "assets/bundles/fishingstuff/fishes/flying demon fish.asset", // Flying Demon Fish
       "assets/bundles/fishingstuff/fishes/plastic fish.asset", // Plastic Fish
+      "assets/bundles/fishingstuff/fishes/prime fish.asset", // Prime Fish
     };
 
     string size2 = "assets/bundles/fishingstuff/fishes/png fish.asset"; // "size 2"
