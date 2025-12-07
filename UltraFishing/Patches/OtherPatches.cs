@@ -34,7 +34,13 @@ public static class OtherPatches {
         MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.CoinToss);
         obj.GetComponent<Rigidbody>().AddForce(camObj.transform.forward * 20f + Vector3.up * 15f + MonoSingleton<PlayerTracker>.Instance.GetPlayerVelocity(trueVelocity: true), ForceMode.VelocityChange);
 
-       GameObject.Destroy(__instance.gameObject);
+        GameObject.Destroy(__instance.gameObject);
+        break;
+      case "Flying Demon Fish":
+        GameObject proj = Plugin.bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/projectiles/flying demon fish/projectile.prefab");
+        Object.Instantiate(proj, NewMovement.Instance.transform.position, CameraController.Instance.transform.rotation);
+
+        GameObject.Destroy(__instance.gameObject);
         break;
     }
   }
