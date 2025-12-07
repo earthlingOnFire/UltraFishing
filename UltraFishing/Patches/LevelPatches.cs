@@ -274,8 +274,26 @@ public static class LevelPatches {
       case "Level 2-2":
         WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
           .AddFish("Vapor Fish")
-          .SetUp("Strean", Color.cyan);
-        break;
+          .SetUp("Stream", Color.cyan);
+                for (int i = 0; i <= GenericHelper.FindGameObject("5 - Second District/5 Nonstuff/Water/Colliders").transform.childCount; i++)
+                {
+                    if (i >1 && i<6)
+                    {
+                        WaterBuilder.SetWater("5 - Second District/5 Nonstuff/Water/Colliders/",i)
+
+                      .AddFish("Plastic Fish")
+                      .SetUp("Sewer", Color.blue);
+                    }
+                    else
+                    {
+                        WaterBuilder.SetWater("5 - Second District/5 Nonstuff/Water/Colliders/", i)
+
+                      .AddFish("Vapor Fish")
+                      .SetUp("Stream", Color.cyan);
+                    }
+                }
+
+                break;
       case "Level 2-3":
         WaterBuilder.SetWater("1 - Main Hall/1 Nonstuff/Water/", 3)
           .AddFish("Koi Fish")
@@ -457,14 +475,38 @@ public static class LevelPatches {
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
         break;
+            case "Level 7-1":
+                WaterBuilder.SetWater("First Section/Opening Halls Geometry/Opening Nonstuff/Curved Turn/Water/")
+  .AddFish("Mannequin Fish")
+  .SetUp("RENAME", Color.white);
+                WaterBuilder.SetWater("Second Section/2 - Left Arena/2 Nonstuff/Water/")
+.AddFish("Mannequin Fish")
+.SetUp("RENAME", Color.white);
+                WaterBuilder.SetWater("Second Section/4 - Interior Exterior/4 Nonstuff/Building/Floor 1/Water/")
+.AddFish("Mannequin Fish")
+.SetUp("RENAME", Color.white);
+                break;
       case "Level 7-2":
-        //optionally, Outdoors/12 - Red Skull Trench/12 Nonstuff/Water
-        WaterBuilder.SetWater("Outdoors/Decorations/Ground/Blood")
+                //optionally, Outdoors/12 - Red Skull Trench/12 Nonstuff/Water
+        WaterBuilder.SetWater("Intro Interiors/5 - Corner Staircase/Secret/Water/")
+          .AddFish("Mannequin Fish")
+          .SetUp("RENAME", Color.white);
+
+                WaterBuilder.SetWater("Outdoors/Decorations/Ground/Blood")
           .AddFish("Bomb Fish")
           .SetUp("The River Phlegethon", Color.black);
         break;
       case "Level 7-3":
-        WaterBuilder.SetWater("3 - Central Plaza/3 Nonstuff/Tree Area/Cube/")
+                WaterBuilder.SetWater("Outdoors Areas/Geometry/5/Water/")
+.AddFish("Mannequin Fish")
+.SetUp("RENAME", Color.white);
+                WaterBuilder.SetWater("Outdoors Areas/Geometry/5 -> 3/Secret 1/Cube/")
+.AddFish("Mannequin Fish")
+.SetUp("RENAME", Color.white);
+                WaterBuilder.SetWater("Outdoors Areas/Geometry/10/Water/")
+.AddFish("Mannequin Fish")
+.SetUp("RENAME", Color.white);
+                WaterBuilder.SetWater("3 - Central Plaza/3 Nonstuff/Tree Area/Cube/")
           .AddFish("Tasty Fish")
           .SetUp("Blood Tree Roots", Color.red);
         WaterBuilder.SetWater("Outdoors Areas/Geometry/9/Floor/Cube/")
@@ -497,7 +539,12 @@ public static class LevelPatches {
           .AddMeshCollider(false)
           .SetUp("The Water Ups", Color.blue);
         break;
-      case "Level P-2":
+            case "Level P-1":
+                WaterBuilder.SetWater("3 - Fuckatorium/3 Stuff/FleshPrisonWave/Flesh Prison/")
+                  .AddFish("Prime Fish")
+                  .SetUp("Flesh Prison", Color.black);
+                break;
+            case "Level P-2":
         WaterBuilder.SetWater("Shortcut/Deathzones/Deathzone")
           .AddFish("Metal(?) Fish")
           .SetUp("Scrindonguloded Souls", Color.black);
@@ -522,7 +569,10 @@ public static class LevelPatches {
         WaterBuilder.SetWater("Main Section/Inside/6 - Soul Tunnel/6 Nonstuff/Soulwalls", 2)
           .AddFish("Metal(?) Fish")
           .SetUp("Damned Souls", Color.black);
-        break;
+        WaterBuilder.SetWater("Main Section/9 - Boss Arena/Boss Stuff/PrisonPhase/Flesh Prison 2/")
+          .AddFish("Prime Fish")
+          .SetUp("Flesh Panopticon", Color.yellow);
+                break;
       case "Level 0-E":
         WaterBuilder.SetWater("6 - Crossroads/6 Nonstuff/6 Hot Only/Blood")
           .AddFish("Filthy Screaming Fish (Filsh)")
