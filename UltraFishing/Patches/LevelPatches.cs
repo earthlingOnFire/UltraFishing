@@ -527,12 +527,15 @@ public static class LevelPatches {
           .SetUp("Pond", Color.white);
         WaterBuilder.SetWater("Pit/PitDestroyer")
           .AddFish("Wise Fish")
+          .SetSplash("Books")
           .SetUp("Depths Of The Library", Color.gray);
         WaterBuilder.SetWater("Curved Pit Destroyer")
           .AddFish("Wise Fish")
+          .SetSplash("Books")
           .SetUp("Depths Of The Library", Color.gray);
         WaterBuilder.SetWater("Curved Pit Destroyer/GameObject")
           .AddFish("Wise Fish")
+          .SetSplash("Books")
           .SetUp("Depths Of The Library", Color.gray);
         WaterBuilder.SetWater("7-S_Unpaintable/Exterior/The Water Ups_Todo/The Water Ups/Water Ups Ocean")
           .AddFish("\"size 2\"", GlobalFishManager.Size2Chance())
