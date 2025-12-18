@@ -187,16 +187,16 @@ public static class LevelPatches {
         break;
       case "Level 1-2":
         WaterBuilder.SetWater("5 - Double Hallway/5 Nonstuff/Floor/", 8)
-          .AddFish("null")
-          .SetUp("Castle Water", Color.magenta);
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
         //sewer?
         WaterBuilder.SetWater("3 - Stairs Room/3 Nonstuff/Floor/", 7)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
         foreach (Transform objects in GenericHelper.FindGameObject("7 - Castle Entrance/7 Nonstuff/Sewer/Water").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
-            .SetUp("Castle Water", Color.magenta);
+            .AddFish("Null")
+            .SetUp("Castle Sewer", Color.magenta);
         }
         WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Sewer/GreenWater")
           .AddFish("Cancerous Fish")
@@ -207,13 +207,23 @@ public static class LevelPatches {
         break;
       case "Level 1-3":
         foreach (Transform objects in GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
-            .SetUp("Castle Water", Color.magenta);
+                    if (objects == GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform.GetChild(0))
+                    {
+                        WaterBuilder.SetWater(objects.gameObject)
+                      .AddFish("Null")
+                      .SetUp("Castle Water", Color.magenta);
+                    }
+                    else
+                    {
+                        WaterBuilder.SetWater(objects.gameObject)
+                          .AddFish("NaN")
+                          .SetUp("Castle Water", Color.magenta);
+                    }
+
         }
         foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
+            .AddFish("Null")
             .SetUp("Castle Water", Color.magenta);
         }
         foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform) {
@@ -223,12 +233,12 @@ public static class LevelPatches {
         }
         foreach (Transform objects in GenericHelper.FindGameObject("B2 -> B2-B Water/Water/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
+            .AddFish("NaN")
             .SetUp("Castle Water", Color.magenta);
         }
         foreach (Transform objects in GenericHelper.FindGameObject("B2 -> B2-B Water/Water/Cube (2)/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
+            .AddFish("NaN")
             .SetUp("Castle Water", Color.magenta);
         }
         WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 5)
@@ -241,7 +251,7 @@ public static class LevelPatches {
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater(GenericHelper.FindGameObject("S - Secret Fight/S Nonstuff/Water/Cube/"))
-          .AddFish("Nil")
+          .AddFish("Null")
           .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater("R2 - Second Arena/R2 Nonstuff/Lava")
           .AddFish("Overcooked Fish")
