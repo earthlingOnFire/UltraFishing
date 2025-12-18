@@ -432,9 +432,23 @@ public static class LevelPatches {
           .SetUp("The Ocean Styx", Color.blue);
         break;
       case "Level 5-3":
-        WaterBuilder.SetWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/Cube/")
-          .AddFish("Wine Fish")
-          .SetUp("The Ocean Styx", new Color(146, 70, 120));
+
+                WaterBuilder.CreateWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/")
+                .SetPosition(0, -12.25f, 478.25f)
+                .SetLocalScale(20, 2, 5)
+                .AddFish("Wine Fish")
+                .SetUp("bar", new Color(0.54f, 0.2f, 0.65f, 1));
+
+                GameObject bar = GenericHelper.FindGameObject("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/");
+                GameObject baroverride = new GameObject();
+
+                baroverride.transform.parent = bar.transform.GetChild(3).transform;
+
+                baroverride.transform.localPosition = new Vector3(0,0, 0);
+
+                bar.transform.GetChild(3).GetComponent<FakeWater>().overrideFishingPoint = baroverride.transform;
+                    
+                    
         break;
       case "Level 5-4":
         WaterBuilder.SetWater("Surface/Stuff/Watersurface/Cube")
