@@ -77,6 +77,7 @@ public static class LevelPatches {
   private static void SetupWaters() {
     switch (SceneHelper.CurrentScene) {
       case "uk_construct":
+        
         WaterBuilder.SetWater("Water Tri")
           .AddFish("Funny Stupid Fish (Friend)")
           .AddFish("PITR Fish")
@@ -85,12 +86,14 @@ public static class LevelPatches {
           .AddFish("Chomper")
           .AddFish("Bomb Fish")
           .AddFish("Eyeball")
+          
           .AddFish("Frog (?)")
           .AddFish("Dope Fish")
           .AddFish("Stickfish")
           .AddFish("Cooked Fish")
           .AddFish("Shark")
           .SetUp("Garry's Lake", Color.green);
+                
         break;
       case "CreditsMuseum2":
         WaterBuilder.SetWater("__Room_Aquarium/", 8)
@@ -189,13 +192,21 @@ public static class LevelPatches {
         WaterBuilder.SetWater("5 - Double Hallway/5 Nonstuff/Floor/", 8)
           .AddFish("Nil")
           .SetUp("Stream", Color.magenta);
-        //sewer?
+                //sewer?
+                ZoneBuilder.CreateZone()
+                    .SetPosition(0, -28.5f, 467.5f)
+                    .SetLocalScale(13,13,13)
+                    .SuggestedDistance(0.07f)
+                    .CustomMinDistance(1.4f);
+                    
+
+
         WaterBuilder.SetWater("3 - Stairs Room/3 Nonstuff/Floor/", 7)
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
         foreach (Transform objects in GenericHelper.FindGameObject("7 - Castle Entrance/7 Nonstuff/Sewer/Water").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Null")
+            .AddFish("null")
             .SetUp("Castle Sewer", Color.magenta);
         }
         WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Sewer/GreenWater")
@@ -210,7 +221,7 @@ public static class LevelPatches {
                     if (objects == GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform.GetChild(0))
                     {
                         WaterBuilder.SetWater(objects.gameObject)
-                      .AddFish("Null")
+                      .AddFish("null")
                       .SetUp("Castle Water", Color.magenta);
                     }
                     else
@@ -223,7 +234,7 @@ public static class LevelPatches {
         }
         foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform) {
           WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Null")
+            .AddFish("null")
             .SetUp("Castle Water", Color.magenta);
         }
         foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform) {
@@ -251,7 +262,7 @@ public static class LevelPatches {
           .AddFish("Nil")
           .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater(GenericHelper.FindGameObject("S - Secret Fight/S Nonstuff/Water/Cube/"))
-          .AddFish("Null")
+          .AddFish("null")
           .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater("R2 - Second Arena/R2 Nonstuff/Lava")
           .AddFish("Overcooked Fish")
