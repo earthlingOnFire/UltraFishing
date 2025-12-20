@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace UltraFishing;
 
-public class WaterBuilder {
+public class WaterBuilder
+{
 
   private bool isFake;
   private FakeWater fakeWater;
@@ -14,35 +15,49 @@ public class WaterBuilder {
 
   public static Dictionary<string, GameObject> customSplashes = new Dictionary<string, GameObject>();
 
-  public WaterBuilder(Water water) {
+  public WaterBuilder(Water water)
+  {
     this.gameObject = water.gameObject;
     this.water = water;
     this.isFake = false;
   }
 
-  public WaterBuilder(FakeWater fakeWater) {
+  public WaterBuilder(FakeWater fakeWater)
+  {
     this.gameObject = fakeWater.gameObject;
     this.fakeWater = fakeWater;
     this.isFake = true;
   }
 
-  public static WaterBuilder SetWater(GameObject gameObject) {
-    if (gameObject == null) {
+  public static WaterBuilder SetWater(GameObject gameObject)
+  {
+    if (gameObject == null)
+    {
       return null;
     }
 
     var water = gameObject.GetComponent<Water>();
+    var fakewater = gameObject.GetComponent<FakeWater>();
 
-    if (water == null) {
-      return new WaterBuilder(gameObject.AddComponent<FakeWater>());
-    }
+    if (water == null)
+    {
+        if (fakewater == null)
+            {
+                return new WaterBuilder(gameObject.AddComponent<FakeWater>());
 
-    return new WaterBuilder(water);
+            }
+            return new WaterBuilder(fakewater);
+
+        }
+
+        return new WaterBuilder(water);
   }
 
-  public static WaterBuilder SetWater(string gameObjectPath) {
+  public static WaterBuilder SetWater(string gameObjectPath)
+  {
     GameObject gameObject = GenericHelper.FindGameObject(gameObjectPath);
-    if (gameObject == null) {
+    if (gameObject == null)
+    {
       Plugin.logger.LogError($"Could not find GameObject at path {gameObjectPath}");
       return null;
     }
@@ -50,14 +65,28 @@ public class WaterBuilder {
     return SetWater(gameObject);
   }
 
-  public static WaterBuilder SetWater(string parentPath, int childIndex) {
+  public static WaterBuilder SetWater(Transform gameObjectT)
+  {
+    GameObject gameObject = gameObjectT.gameObject;
+    if (gameObject == null)
+    {
+      Plugin.logger.LogError($"Could not find GameObject {gameObjectT}");
+      return null;
+    }
+
+    return SetWater(gameObject);
+  }
+  public static WaterBuilder SetWater(string parentPath, int childIndex)
+  {
     GameObject parent = GenericHelper.FindGameObject(parentPath);
-    if (parent == null) {
+    if (parent == null)
+    {
       Plugin.logger.LogError($"Could not find GameObject at path {parentPath}");
       return null;
     }
 
-    if (childIndex >= parent.transform.childCount) {
+    if (childIndex >= parent.transform.childCount)
+    {
       Debug.Log($"GameObject at path {parentPath} only has {parent.transform.childCount} children!");
       return null;
     }
@@ -67,14 +96,17 @@ public class WaterBuilder {
     return SetWater(child);
   }
 
-  public static WaterBuilder SetWater(string parentPath, int childIndex, string childPath) {
+  public static WaterBuilder SetWater(string parentPath, int childIndex, string childPath)
+  {
     GameObject parent = GenericHelper.FindGameObject(parentPath);
-    if (parent == null) {
+    if (parent == null)
+    {
       Plugin.logger.LogError($"Could not find GameObject at path {parentPath}");
       return null;
     }
 
-    if (childIndex >= parent.transform.childCount) {
+    if (childIndex >= parent.transform.childCount)
+    {
       Debug.Log($"GameObject at path {parentPath} only has {parent.transform.childCount} children!");
       return null;
     }
@@ -82,7 +114,8 @@ public class WaterBuilder {
     GameObject child = parent.transform.GetChild(childIndex).gameObject;
 
     GameObject gameObject = child.transform.Find(childPath).gameObject;
-    if (gameObject == null) {
+    if (gameObject == null)
+    {
       Plugin.logger.LogError($"Could not find GameObject at path {parentPath}, {childIndex}, {childPath}");
       return null;
     }
@@ -90,8 +123,9 @@ public class WaterBuilder {
     return SetWater(gameObject);
   }
 
-  // Creates new GameObject with a FakeWater component and a BoxCollider
-  public static WaterBuilder CreateWater() { 
+  // Creates new GameObject with SetWater FakeWater component and a BoxCollider
+  public static WaterBuilder CreateWater()
+  {
     GameObject water = new GameObject("fakewater", typeof(FakeWater));
 
     BoxCollider collider = water.AddComponent<UnityEngine.BoxCollider>();
@@ -101,12 +135,14 @@ public class WaterBuilder {
   }
 
   // Creates new GameObject with a FakeWater component and a BoxCollider
-  public static WaterBuilder CreateWater(string parentPath) { 
+  public static WaterBuilder CreateWater(string parentPath)
+  {
     WaterBuilder waterBuilder = CreateWater();
     GameObject water = waterBuilder.gameObject;
 
     GameObject parent = GenericHelper.FindGameObject(parentPath);
-    if (parent != null) {
+    if (parent != null)
+    {
       water.transform.SetParent(parent.transform);
       water.transform.localPosition = Vector3.zero;
     }
@@ -115,30 +151,45 @@ public class WaterBuilder {
   }
 
   // Should only be used with CreateWater.
-  public WaterBuilder SetPosition(float x, float y, float z) {
+  public WaterBuilder SetPosition(float x, float y, float z)
+  {
     gameObject.transform.position = new Vector3(x, y, z);
 
     return this;
   }
 
   // Should only be used with CreateWater.
-  public WaterBuilder SetLocalScale(float x, float y, float z) {
+  public WaterBuilder SetLocalScale(float x, float y, float z)
+  {
     gameObject.transform.localScale = new Vector3(x, y, z);
 
     return this;
   }
 
-  public WaterBuilder AddFish(string fish, int chance = 1) {
-    if (fishDB == null) {
+  public WaterBuilder AddFish(string fish, int chance = 1)
+  {
+    if (fishDB == null)
+    {
       fishDB = FishHelper.GetFishDB(fish, chance);
-    } else {
+    }
+    else
+    {
       fishDB = FishHelper.AddFishToDB(fishDB, fish, chance);
     }
 
     return this;
   }
+    public WaterBuilder AddFishes(List<string> fish)
+    {
+        foreach (string fish1 in fish)
+        {
+            AddFish(fish1);
+        }
+        return this;
 
-  public WaterBuilder RaiseFishingPoint(float amount) {
+    }
+    public WaterBuilder RaiseFishingPoint(float amount)
+  {
     Transform originalTransform = gameObject.transform;
     Transform newTransform = Object.Instantiate(originalTransform);
     newTransform.localPosition = new Vector3(
@@ -147,20 +198,25 @@ public class WaterBuilder {
         originalTransform.localPosition.z
     );
 
-    if (isFake) {
+    if (isFake)
+    {
       fakeWater.overrideFishingPoint = newTransform;
     }
-    else {
+    else
+    {
       water.overrideFishingPoint = newTransform;
     }
 
     return this;
   }
 
-  public WaterBuilder AddMeshCollider(bool isTrigger = true) {
-    if (gameObject != null) {
+  public WaterBuilder AddMeshCollider(bool isTrigger = true)
+  {
+    if (gameObject != null)
+    {
       MeshCollider col = gameObject.AddComponent<MeshCollider>();
-      if (isTrigger) {
+      if (isTrigger)
+      {
         col.convex = true;
         col.isTrigger = true;
       }
@@ -169,10 +225,13 @@ public class WaterBuilder {
     return this;
   }
 
-  public WaterBuilder AddBoxCollider(bool isTrigger = true) {
-    if (gameObject != null) {
+  public WaterBuilder AddBoxCollider(bool isTrigger = true)
+  {
+    if (gameObject != null)
+    {
       BoxCollider col = gameObject.AddComponent<BoxCollider>();
-      if (isTrigger) {
+      if (isTrigger)
+      {
         col.isTrigger = true;
       }
     }
@@ -180,13 +239,15 @@ public class WaterBuilder {
     return this;
   }
 
-  public WaterBuilder AddBait(string baitPath, string fish) {
+  public WaterBuilder AddBait(string baitPath, string fish)
+  {
     GameObject bait = GenericHelper.FindGameObject(baitPath);
 
     FishObject fishObject = FishHelper.GetFish(fish);
     BaitItem baitItem = bait.GetComponent<BaitItem>();
 
-    if (baitItem == null) {
+    if (baitItem == null)
+    {
       baitItem = bait.AddComponent<BaitItem>();
     }
 
@@ -197,41 +258,52 @@ public class WaterBuilder {
     return this;
   }
 
-  public WaterBuilder SetName(string name) {
+  public WaterBuilder SetName(string name)
+  {
     if (fishDB == null) fishDB = FishHelper.GetFishDB(null);
     fishDB.fullName = name;
-    
+
     return this;
   }
 
-  public WaterBuilder SetColor(Color color) {
+  public WaterBuilder SetColor(Color color)
+  {
     if (fishDB == null) fishDB = FishHelper.GetFishDB(null);
     fishDB.symbolColor = color;
-    
+
     return this;
   }
 
-  public WaterBuilder SetSplash(string splashName) {
-    if (WaterBuilder.customSplashes.ContainsKey(splashName)) {
-      if (fakeWater != null) {
+  public WaterBuilder SetSplash(string splashName)
+  {
+    if (WaterBuilder.customSplashes.ContainsKey(splashName))
+    {
+      if (fakeWater != null)
+      {
         fakeWater.customSplash = WaterBuilder.customSplashes[splashName];
       }
-      else {
+      else
+      {
         Plugin.logger.LogError("Custom splash could not be added. No FakeWater found.");
       }
     }
-    else {
+    else
+    {
       Plugin.logger.LogError($"No splash named {splashName} found.");
     }
 
     return this;
   }
 
-  public void SetUp() {
-    if (isFake) {
+  public void SetUp()
+  {
+    if (isFake)
+    {
       fakeWater.fishDB = fishDB;
       fakeWater.SetupFishDB(fishDB);
-    } else {
+    }
+    else
+    {
       water.fishDB = fishDB;
       fishDB.SetupWater(water);
     }
@@ -239,11 +311,24 @@ public class WaterBuilder {
     FishHelper.UpdateFishManager(fishDB);
   }
 
-  public void SetUp(string name, Color color) {
-    fishDB.fullName = name;
-    fishDB.symbolColor = color;
+  public void SetUp(string name, Color color)
+  {
+        if (fishDB == null)
+        {
+            Plugin.logger.LogWarning($"fish db was null, because of course it was");
 
-    SetUp();
+            fishDB = FishHelper.GetFishDB(null);
+        }
+        Plugin.logger.LogWarning($"Name {name} Color {color}");
+        fishDB.fullName = name;
+        Plugin.logger.LogWarning($"FISH DB PASS TEST 1");
+
+        fishDB.symbolColor = color;
+        Plugin.logger.LogWarning($"FISH DB PASS TEST 2");
+
+        SetUp();
   }
+
+
 
 }
