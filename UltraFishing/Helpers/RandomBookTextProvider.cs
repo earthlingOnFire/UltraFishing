@@ -409,6 +409,13 @@ Fisher Number 427's job was simple. They would sit at their fishing spot and cat
 
 This is what Fisher 427 did every day of every month of every year; and althoigh others might have considered it soul-rending, <color=orange>{GenericHelper.GetSteamName()}</color> relished every moment that the orders came in, as though they had been made exactly for this job... and <color=orange>{GenericHelper.GetSteamName()}</color> was happy.
 """",
+$""""
+<b>POST FROM AN ONLINE FORUM</b>
+
+GABMIRAGE MV1 AND GABV1EL WITH MIRAGE POSSESSING V1 X GABRIEL 
+
+NOBODY MOVE!!!
+"""",
 """"
 <b>EXCERPT FROM A FAMOUS JOKE BOOK</b>
 
