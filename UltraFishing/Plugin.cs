@@ -169,13 +169,15 @@ public class Plugin : BaseUnityPlugin {
       terminal = bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/fishing enc terminal.prefab");
 
       string[] splashes = {
+        "assets/bundles/fishingstuff/splashes/NoSplash.prefab",
         "assets/bundles/fishingstuff/splashes/Electricity_FishingBaitSplash1.prefab",
         "assets/bundles/fishingstuff/splashes/Sand_FishingBaitSplash.prefab",
         "assets/bundles/fishingstuff/splashes/book/BookSplash.prefab",
       };
-      WaterBuilder.customSplashes.Add("Electricity", bundle.LoadAsset<GameObject>(splashes[0]));
-      WaterBuilder.customSplashes.Add("Sand", bundle.LoadAsset<GameObject>(splashes[1]));
-      WaterBuilder.customSplashes.Add("Books", bundle.LoadAsset<GameObject>(splashes[2]));
+      WaterBuilder.customSplashes.Add("None", bundle.LoadAsset<GameObject>(splashes[0]));
+      WaterBuilder.customSplashes.Add("Electricity", bundle.LoadAsset<GameObject>(splashes[1]));
+      WaterBuilder.customSplashes.Add("Sand", bundle.LoadAsset<GameObject>(splashes[2]));
+      WaterBuilder.customSplashes.Add("Books", bundle.LoadAsset<GameObject>(splashes[3]));
     }
   }
 }

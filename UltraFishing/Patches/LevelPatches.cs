@@ -111,7 +111,7 @@ public static class LevelPatches {
           .AddFish("Shark")
           .SetUp("Aquarium", Color.cyan);
         WaterBuilder.SetWater("__Room_Courtyard/__Level Geo/Water Fountain/Water fountain_water_1")
-          .AddFish("Scraphead Fish")
+          .AddFish("Coin")
           .SetUp("Fountain", Color.cyan);
         WaterBuilder.SetWater("__Room_FrontDesk_1/__Level geo/Cube (3)")
           .AddFish("Wise Fish")
@@ -284,10 +284,11 @@ public static class LevelPatches {
       case "Level 2-1":
         GameObject hankFisher = Plugin.bundle.LoadAsset<GameObject>(
             "assets/bundles/fishingstuff/level prefabs/hankfisher 1.prefab"
-            );
+        );
         GameObject hankFisherClone = Object.Instantiate(hankFisher);
         WaterBuilder.SetWater(hankFisherClone.transform.Find("Fishpoint").gameObject)
           .AddFish("Flying Demon Fish")
+          .SetSplash("None")
           .SetUp("Lust Skyline", Color.magenta);
         break;
       case "Level 2-2":

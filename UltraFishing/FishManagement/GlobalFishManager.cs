@@ -50,18 +50,18 @@ public static class GlobalFishManager {
     };
 
     string[] customFishesPage2 = {
+      "assets/bundles/fishingstuff/fishes/sword fish.asset", // Scraphead Fish
       "assets/bundles/fishingstuff/fishes/wire shark.asset", // Wire Shark
       "assets/bundles/fishingstuff/fishes/nil fish.asset", // Nil
       "assets/bundles/fishingstuff/fishes/nan fish.asset", // NaN
+      "assets/bundles/fishingstuff/fishes/flying demon fish.asset", // Flying Demon Fish
       "assets/bundles/fishingstuff/fishes/vapor fish.asset", // Vapor Fish
+      "assets/bundles/fishingstuff/fishes/plastic fish.asset", // Plastic Fish
       "assets/bundles/fishingstuff/fishes/ancient fish.asset", // Ancient Fish
       "assets/bundles/fishingstuff/fishes/wine fish.asset", // Wine Fish
       "assets/bundles/fishingstuff/fishes/mannequin fish.asset", // Mannequin Fish
       "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
-      "assets/bundles/fishingstuff/fishes/flying demon fish.asset", // Flying Demon Fish
-      "assets/bundles/fishingstuff/fishes/plastic fish.asset", // Plastic Fish
       "assets/bundles/fishingstuff/fishes/prime fish.asset", // Prime Fish
-      "assets/bundles/fishingstuff/fishes/sword fish.asset", // Scraphead Fish
     };
 
     string size2 = "assets/bundles/fishingstuff/fishes/png fish.asset"; // "size 2"
