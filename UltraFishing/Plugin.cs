@@ -172,7 +172,7 @@ public class Plugin : BaseUnityPlugin {
         "assets/bundles/fishingstuff/splashes/NoSplash.prefab",
         "assets/bundles/fishingstuff/splashes/Electricity_FishingBaitSplash1.prefab",
         "assets/bundles/fishingstuff/splashes/Sand_FishingBaitSplash.prefab",
-        "assets/bundles/fishingstuff/splashes/book/BookSplash.prefab",
+        "assets/bundles/fishingstuff/splashes/book/Book_FishingBaitSplash.prefab",
       };
       WaterBuilder.customSplashes.Add("None", bundle.LoadAsset<GameObject>(splashes[0]));
       WaterBuilder.customSplashes.Add("Electricity", bundle.LoadAsset<GameObject>(splashes[1]));
