@@ -20,74 +20,67 @@ public static class GlobalFishManager {
   public static void Start() {
     string savePath = Path.Combine(Plugin.modDir, "fish.save");
 
-    string[] defaultFishes = {
-      "Assets/Data/Fishing/Fishes/Funny Stupid Fish.asset", //Funny Stupid Fish (Friend)
-      "Assets/Data/Fishing/Fishes/pitr fish.asset", //PITR Fish
-      "Assets/Data/Fishing/Fishes/Trout.asset", //Trout
-      "Assets/Data/Fishing/Fishes/Amid Evil Fish.asset", //Metal Fish
-      "Assets/Data/Fishing/Fishes/Chomper.asset", //Chomper
-      "Assets/Data/Fishing/Fishes/Bomb Fish.asset", //Bomb Fish
-      "Assets/Data/Fishing/Fishes/Gib Eye.asset", //Eyeball
-      "Assets/Data/Fishing/Fishes/Iron Lung Fish.asset", //Frog (?)
-      "Assets/Data/Fishing/Fishes/Dope Fish.asset", //Dope Fish
-      "Assets/Data/Fishing/Fishes/Stickfish.asset", //Stickfish
-      "Assets/Data/Fishing/Fishes/Cooked Fish.asset", //Cooked Fish
-      "Assets/Data/Fishing/Fishes/Shark.asset", //Shark
-    };
-    string[] customFishesPage1 = {
-      "assets/bundles/fishingstuff/fishes/filth fish.asset", // Filthy Screaming Fish (Filsh)
-      "assets/bundles/fishingstuff/fishes/missing fish.asset", // null
-      "assets/bundles/fishingstuff/fishes/cancer fish.asset", // Cancerous Fish
-      "assets/bundles/fishingstuff/fishes/koi fish.asset", // Koi Fish
-      "assets/bundles/fishingstuff/fishes/melted fish.asset", // Melted Fish
-      "assets/bundles/fishingstuff/fishes/nerd shark.asset", // Nerd Shark
-      "assets/bundles/fishingstuff/fishes/leviathan fish.asset", // Eel (?)
-      "assets/bundles/fishingstuff/fishes/death metal fish.asset", // Metal(?) Fish
-      "assets/bundles/fishingstuff/fishes/overcooked fish.asset", // Overcooked Fish
-      "assets/bundles/fishingstuff/fishes/frozen fish.asset", // Frozen Fish
-      "assets/bundles/fishingstuff/fishes/coin fish.asset", // Coin
-      "assets/bundles/fishingstuff/fishes/book fish.asset", // Wise Fish
+    (string, int)[] defaultFishes = {
+      ("Assets/Data/Fishing/Fishes/Funny Stupid Fish.asset", 0), // Funny Stupid Fish (Friend)
+      ("Assets/Data/Fishing/Fishes/pitr fish.asset", 1), // PITR Fish
+      ("Assets/Data/Fishing/Fishes/Trout.asset", 2), // Trout
+      ("Assets/Data/Fishing/Fishes/Amid Evil Fish.asset", 3), // Metal Fish
+      ("Assets/Data/Fishing/Fishes/Chomper.asset", 4), // Chomper
+      ("Assets/Data/Fishing/Fishes/Bomb Fish.asset", 5), // Bomb Fish
+      ("Assets/Data/Fishing/Fishes/Gib Eye.asset", 6), // Eyeball
+      ("Assets/Data/Fishing/Fishes/Iron Lung Fish.asset", 7), // Frog (?)
+      ("Assets/Data/Fishing/Fishes/Dope Fish.asset", 8), // Dope Fish
+      ("Assets/Data/Fishing/Fishes/Stickfish.asset", 9), // Stickfish
+      ("Assets/Data/Fishing/Fishes/Cooked Fish.asset", 10), // Cooked Fish
+      ("Assets/Data/Fishing/Fishes/Shark.asset", 11), // Shark
     };
 
-    string[] customFishesPage2 = {
-      "assets/bundles/fishingstuff/fishes/sword fish.asset", // Scraphead Fish
-      "assets/bundles/fishingstuff/fishes/wire shark.asset", // Wire Shark
-      "assets/bundles/fishingstuff/fishes/nil fish.asset", // Nil
-      "assets/bundles/fishingstuff/fishes/nan fish.asset", // NaN
-      "assets/bundles/fishingstuff/fishes/flying demon fish.asset", // Flying Demon Fish
-      "assets/bundles/fishingstuff/fishes/vapor fish.asset", // Vapor Fish
-      "assets/bundles/fishingstuff/fishes/plastic fish.asset", // Plastic Fish
-      "assets/bundles/fishingstuff/fishes/ancient fish.asset", // Ancient Fish
-      "assets/bundles/fishingstuff/fishes/wine fish.asset", // Wine Fish
-      "assets/bundles/fishingstuff/fishes/mannequin fish.asset", // Mannequin Fish
-      "assets/bundles/fishingstuff/fishes/tasty fish.asset", // Tasty Fish
-      "assets/bundles/fishingstuff/fishes/prime fish.asset", // Prime Fish
+    (string, int)[] customFishes = {
+      ("assets/bundles/fishingstuff/fishes/filth fish.asset", 12), // Filthy Screaming Fish (Filsh)
+      ("assets/bundles/fishingstuff/fishes/sword fish.asset", 25), // Scraphead Fish
+      ("assets/bundles/fishingstuff/fishes/wire shark.asset", 26), // Wire Shark
+      ("assets/bundles/fishingstuff/fishes/overcooked fish.asset", 20), // Overcooked Fish
+      ("assets/bundles/fishingstuff/fishes/missing fish.asset", 13), // null
+      ("assets/bundles/fishingstuff/fishes/nil fish.asset", 27), // Nil
+      ("assets/bundles/fishingstuff/fishes/nan fish.asset", 28), // NaN
+      ("assets/bundles/fishingstuff/fishes/coin fish.asset", 22), // Coin
+      ("assets/bundles/fishingstuff/fishes/cancer fish.asset", 14), // Cancerous Fish
+      ("assets/bundles/fishingstuff/fishes/flying demon fish.asset", 29), // Flying Demon Fish
+      ("assets/bundles/fishingstuff/fishes/vapor fish.asset", 30), // Vapor Fish
+      ("assets/bundles/fishingstuff/fishes/plastic fish.asset", 31), // Plastic Fish
+      ("assets/bundles/fishingstuff/fishes/koi fish.asset", 15), // Koi Fish
+      ("assets/bundles/fishingstuff/fishes/melted fish.asset", 16), // Melted Fish
+      ("assets/bundles/fishingstuff/fishes/ancient fish.asset", 32), // Ancient Fish
+      ("assets/bundles/fishingstuff/fishes/nerd shark.asset", 17), // Nerd Shark
+      ("assets/bundles/fishingstuff/fishes/wine fish.asset", 33), // Wine Fish
+      ("assets/bundles/fishingstuff/fishes/leviathan fish.asset", 18), // Eel (?)
+      ("assets/bundles/fishingstuff/fishes/mannequin fish.asset", 34), // Mannequin Fish
+      ("assets/bundles/fishingstuff/fishes/tasty fish.asset", 35), // Tasty Fish
+      ("assets/bundles/fishingstuff/fishes/book fish.asset", 23), // Wise Fish
+      ("assets/bundles/fishingstuff/fishes/frozen fish.asset", 21), // Frozen Fish
+      ("assets/bundles/fishingstuff/fishes/death metal fish.asset", 19), // Metal(?) Fish
+      ("assets/bundles/fishingstuff/fishes/prime fish.asset", 36), // Prime Fish
     };
 
     string size2 = "assets/bundles/fishingstuff/fishes/png fish.asset"; // "size 2"
+    int size2SaveSlot = 24;
 
     FishCollection defaultCollection = new FishCollection("ULTRAKILL");
     for (int i = 0; i < defaultFishes.Length; i++) {
-      FishObject fish = Addressables.LoadAssetAsync<FishObject>(defaultFishes[i]).WaitForCompletion();
-      defaultCollection.RegisterFish(fish, savePath, i);
+      FishObject fish = Addressables.LoadAssetAsync<FishObject>(defaultFishes[i].Item1).WaitForCompletion();
+      int saveSlot = defaultFishes[i].Item2;
+      defaultCollection.RegisterFish(fish, savePath, saveSlot);
     }
 
     FishCollection ultrafishingCollection = new FishCollection("ULTRAFISHING");
-    for (int i = 0; i < customFishesPage1.Length; i++) {
-      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishesPage1[i]);
-      int saveSlot = i + defaultFishes.Length;
-      ultrafishingCollection.RegisterFish(PrepareFish(fish), savePath, saveSlot);
-    }
-
-    for (int i = 0; i < customFishesPage2.Length; i++) {
-      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishesPage2[i]);
-      int saveSlot = i + defaultFishes.Length + customFishesPage1.Length + 1;
+    for (int i = 0; i < customFishes.Length; i++) {
+      FishObject fish = Plugin.bundle.LoadAsset<FishObject>(customFishes[i].Item1);
+      int saveSlot = customFishes[i].Item2;
       ultrafishingCollection.RegisterFish(PrepareFish(fish), savePath, saveSlot);
     }
 
     FishCollection size2Collection = new FishCollection("???");
     FishObject size2Fish = Plugin.bundle.LoadAsset<FishObject>(size2);
-    int size2SaveSlot = defaultFishes.Length + customFishesPage1.Length;
     size2Collection.RegisterFish(size2Fish, savePath, size2SaveSlot);
 
     RegisterCollection(defaultCollection);
