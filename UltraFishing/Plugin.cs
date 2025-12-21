@@ -166,6 +166,9 @@ public class Plugin : BaseUnityPlugin {
       WeaponIcon rodIcon = fishingRod.AddComponent<WeaponIcon>();
       rodIcon.weaponDescriptor = bundle.LoadAsset<WeaponDescriptor>("assets/bundles/fishingstuff/rod descriptor.asset");
 
+      RuntimeAnimatorController animControl = bundle.LoadAsset<RuntimeAnimatorController>("assets/bundles/fishingstuff/CustomFishing Rod Animator.controller");
+      fishingRod.GetComponent<FishingRodWeapon>().animator.runtimeAnimatorController = animControl;
+
       terminal = bundle.LoadAsset<GameObject>("assets/bundles/fishingstuff/fishing enc terminal.prefab");
 
       string[] splashes = {
