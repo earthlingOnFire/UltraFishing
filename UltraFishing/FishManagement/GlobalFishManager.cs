@@ -96,6 +96,14 @@ public static class GlobalFishManager {
       case "Wine Fish":
         fish.worldObject.transform.Find("Liquid").gameObject.AddComponent<Liquid>();
         break;
+      case "NaN":
+        MaterialSwapper matSwap = fish.worldObject.transform.GetChild(1).gameObject.AddComponent<MaterialSwapper>();
+        matSwap.mat = Plugin.bundle.LoadAsset<Material>("Assets/Bundles/fishingstuff/Skyboxes/FakeOldScreenField.mat");
+        matSwap.layer = 28;
+        matSwap.ignoreLevels = new List<string>(new string[]{
+            "Level 1-1", "Level 1-2", "Level 1-3", "Level 1-4", "Level 1-E"
+        });
+        break;
     }
     return fish;
   }
