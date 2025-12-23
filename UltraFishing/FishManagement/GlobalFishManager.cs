@@ -151,6 +151,18 @@ An ordinary and very real fish. Native to the beautiful paradise known as Limbo.
 
 Usually found where the water falls.
 """";
+      case "NaN":
+        return """"
+A local delicacy, enjoyed by the happy residents of the peaceful Limbo layer.
+
+Usually found where the water pools.
+"""";
+      case "Nil":
+        return """"
+A very normal fish. You could find similar fish to this one anywhere. Resides in the idyllic and luxurious Limbo layer.
+
+Usually found where the water flows.
+"""";
       case "\"size 2\"":
         return """"
 The legendary fish. The dream of all fishers, yet none have ever caught it. It is said to only appear to expert fishers who have caught every kind of fish.
