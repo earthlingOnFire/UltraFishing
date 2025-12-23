@@ -1,5 +1,5 @@
 # NaN (fake)
-[SOMETHING SIMILAR TO] An ordinary and very real fish. Native to the beautiful paradise known as Limbo.
+A local delicacy, enjoyed by the happy residents of the peaceful Limbo layer.
 
 Usually found where the water pools.
 
@@ -8,11 +8,12 @@ Usually found where the water pools.
 	at Fish.main(Fish.java:2)
 
 # Nil (fake)
+A very normal fish. You could find similar fish to this one anywhere. Resides in the idyllic and luxurious Limbo layer.
+
 Usually found where the water flows.
 
 # Nil (real)
 <color="red">E5108: Error executing lua limbo/fishingstuff/fish.lua:2: bad argument to #1 to 'fishobj' (FishObject expected, got nil)
-
 
 # Hedious
 
