@@ -8,6 +8,7 @@ public class GlobalFishEncyclopedia : FishEncyclopedia {
   private int currentPage;
   private List<int> pageIndices = new List<int>();
   private List<string> pageTitles = new List<string>();
+  public GameObject mannequinFishDescription;
 
   public void StartEncyclopedia() {
     fishButtonTemplate.gameObject.SetActive(value: false);
@@ -109,7 +110,16 @@ public class GlobalFishEncyclopedia : FishEncyclopedia {
 
   public new void SelectFish(FishObject fish) {
     fishName.text = (GlobalFishManager.FoundFish(fish) ? fish.fishName : "???");
-    fishDescription.text = GlobalFishManager.GetFishDescription(fish);
+
+    if (fish.fishName == "Mannequin Fish") {
+      mannequinFishDescription.SetActive(true);
+      fishDescription.text = "";
+    }
+    else {
+      mannequinFishDescription.SetActive(false);
+      fishDescription.text = GlobalFishManager.GetFishDescription(fish);
+    }
+
     fishPicker.SetActive(value: false);
     fishInfoContainer.SetActive(value: true);
     DisplayFish(fish);

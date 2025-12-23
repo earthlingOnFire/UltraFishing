@@ -137,8 +137,12 @@ public static class ComponentReplacementPatches {
 
     backButton.GetComponent<ShopButton>().toActivate = new GameObject[]{ newEnc.fishPicker };
 
-    Object.Destroy(enc);
+    GameObject manneFishDescPrefab = Plugin.bundle.LoadAsset<GameObject>("Assets/Bundles/fishingstuff/HOUSE OF FINS.prefab");
+    newEnc.mannequinFishDescription = GameObject.Instantiate(manneFishDescPrefab, newEnc.fishDescription.transform.parent);
+    newEnc.mannequinFishDescription.transform.localPosition += Vector3.right*2.5f;
+    newEnc.mannequinFishDescription.SetActive(false);
 
+    Object.Destroy(enc);
     return false;
   }
 }
