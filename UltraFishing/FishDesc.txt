@@ -1,36 +1,54 @@
+# NaN (fake)
+[SOMETHING SIMILAR TO] An ordinary and very real fish. Native to the beautiful paradise known as Limbo.
+
+Usually found where the water pools.
+
+# NaN (real)
+<color="red">Exception in thread "main" java.lang.ArithmeticExpression: / by zero
+	at Fish.main(Fish.java:2)
+
+# Nil (fake)
+Usually found where the water flows.
+
+# Nil (real)
+<color="red">E5108: Error executing lua limbo/fishingstuff/fish.lua:2: bad argument to #1 to 'fishobj' (FishObject expected, got nil)
+
+
 # Hedious
 
-An affront to God himself. A creation so vile neither the soil below nor the heavens above accept it, forcing it to be thrown around in the cold, uncaring winds between. It is believed this creature was cast into this torment by its own creator, utterly disgusted at the sight of what they made
+An affront to God Himself. A creation so vile that neither the soil below nor the heavens above will accept it, forcing it to be thrown around in the cold, uncaring winds between. It is believed that this creature was cast into this torment by its own creator, utterly disgusted of its hideous appearance.
 
-It is also considered a delicacy among locals.
+It is, however, considered a delicacy among locals. Brave fishers risk their lives to catch this fish.
 
 # tasty
 
-A delicacy among various machines, often sought after and cultivated. Due to its biological structure it cannot survive outside its natural habitat for long.
+A delicacy among machines. Due to its biological structure, it cannot survive outside its natural habitat for long. Highly sought after, there are many that cultivate this fish, but they are often in conflict with violent poachers.
 
-often found swimming among the roots of its source
+Commonly found swimming along the roots of its source.
 
 # electric
 
-A highly energetic fish, feeding off of malicious data in its path. One of the smarter fish, always able to find the easiest way to its destination
+A highly energetic fish, it feeds off of any malicious data in its way. One of the smarter species, it will always take the shortest path to its destination.
 
-Common in high energy industrial environments
+Common in high-energy industrial environments.
 
 # scrap
 
-Unlike its cousins, this machine seems to have settled for a lower, safer local optimum guaranteed by its enviroment instead of the higher, riskier combat encounters. It reinforces itself using the mangled bits of scrap that litter its enviroment, and gathers nutrients from the crushed flesh.
+A machine in the form of a fish. Unlike its cousins, it seems to have settled for a lower, safer local optimum guaranteed by its environment, instead of engaging in high-risk combat. 
 
-while it utilizes a diffrent strategy for harvesting resources, it seems that it still often immitates others, leading to a lot of individuals sharing nearly identical structures
+It reinforces itself using the mangled bits of scrap that litter its environment, and gathers nutrients from a constant supply of grinded flesh. Its form looks ugly to most, but beautiful to enthusiasts, which has led to many copycats.
 
 # ancient
 
-A manmade fish, created due to the extremely harsh environment in which it resides, legends say that the text carved in it describes the construction of of the monuments around it, prefers boiling hot waters
+A manmade fish, created due to the extremely harsh environment in which it resides. Legends say that the text carved on it describes the construction of the monuments around it.
+
+Prefers boiling hot water.
 
 # wine
 
-A valuable and luxurious fish, often nurtured for prolonged periods of time before consumption, it is said that the older the fish, the fancier the taste
+A valuable and luxurious fish. It is said that the older this fish becomes, the fancier it tastes, so it is often nurtured for prolonged periods of time before consumption.
 
-Can be found in extravagant establishments and luxurious cruises
+A common sight in extravagant establishments and luxurious cruises.
 
 # vapor
 
