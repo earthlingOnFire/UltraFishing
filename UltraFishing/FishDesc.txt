@@ -53,13 +53,15 @@ A common sight in extravagant establishments and luxurious cruises.
 
 # vapor
 
-A synthetic fish, produced by the interaction of technology with older culture, while it does not represent the culture accurately, and instead showcases a distorted version of it, it attracts the eye of the residents, most commonly those who never had the chance to experience the old culture by themselves
+A synthetic fish, produced by the interaction between technology and old culture. Its vision of the past is, however, inaccurate and distorted. 
+
+Can be found in the canals of a nearly fishless city, where it attracts the eye of residents who never had the chance to experience the old culture themselves, but feel a sense of nostalgia for it regardless. 
 
 # Plastic
 
-While the vast majority of Mindflayers adapt a humanoid form, a few have chosen to adapt a non standard form, the reasoning as to why is not fully known, although it seems to be directly linked to a drastic decrease in agressiveness, with them often being completely peacefull
+An extremely rare fish-like machine. Most of its body is made up of a plastic shell in the form of a fish, built by the machine itself, but which serves no practical function. Very few machines of its kind choose this non-standard form, although it seems to be correlated with a major decrease in aggression. 
 
-prefer secluded, desolate parts of structures
+Mostly peaceful in nature, it prefers secluded, desolate parts of structures, including sewers. 
 
 # Prime
 
