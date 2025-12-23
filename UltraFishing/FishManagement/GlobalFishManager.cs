@@ -104,6 +104,12 @@ public static class GlobalFishManager {
             "Level 1-1", "Level 1-2", "Level 1-3", "Level 1-4", "Level 1-E"
         });
         break;
+      case "Prime Fish":
+        MaterialSwapper matSwap1 = fish.worldObject.transform.GetChild(0).gameObject.AddComponent<MaterialSwapper>();
+        matSwap1.mat = Plugin.bundle.LoadAsset<Material>("Assets/Bundles/fishingstuff/MinosPrimeBody.mat");
+        matSwap1.layer = -1;
+        matSwap1.ignoreLevels = new List<string>(new string[]{"Level P-2"});
+        break;
     }
     return fish;
   }

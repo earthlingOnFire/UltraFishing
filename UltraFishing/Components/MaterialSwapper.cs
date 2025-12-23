@@ -10,7 +10,8 @@ public class MaterialSwapper : MonoBehaviour {
 
   void Start() {
     Renderer rend = GetComponent<Renderer>();
-    if (gameObject.layer == layer && !ignoreLevels.Exists(s => s == SceneHelper.CurrentScene)) {
+    if ((layer == -1 || gameObject.layer == layer)
+        && !ignoreLevels.Exists(s => s == SceneHelper.CurrentScene)) {
       rend.material = mat;
     }
   }
