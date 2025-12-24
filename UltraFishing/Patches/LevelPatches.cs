@@ -507,7 +507,7 @@ public static class LevelPatches
                 WaterBuilder.CreateWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/")
                   .SetPosition(0, -12.25f, 478.25f)
                   .SetLocalScale(20, 2, 5)
-                  .AddFish("Wine Fish")
+                  .AddFish("Poisson de Vin")
                   .SetSplash("None")
                   .SetUp("Bar", new Color(0.54f, 0.2f, 0.65f, 1));
                 GameObject bar = GenericHelper.FindGameObject("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/");

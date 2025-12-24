@@ -52,7 +52,7 @@ public static class GlobalFishManager {
       ("assets/bundles/fishingstuff/fishes/melted fish.asset", 16), // Melted Fish
       ("assets/bundles/fishingstuff/fishes/ancient fish.asset", 32), // Ancient Fish
       ("assets/bundles/fishingstuff/fishes/nerd shark.asset", 17), // Nerd Shark
-      ("assets/bundles/fishingstuff/fishes/wine fish.asset", 33), // Wine Fish
+      ("assets/bundles/fishingstuff/fishes/wine fish.asset", 33), // Poisson de Vin
       ("assets/bundles/fishingstuff/fishes/leviathan fish.asset", 18), // Eel (?)
       ("assets/bundles/fishingstuff/fishes/mannequin fish.asset", 34), // Mannequin Fish
       ("assets/bundles/fishingstuff/fishes/tasty fish.asset", 35), // Tasty Fish
@@ -93,7 +93,7 @@ public static class GlobalFishManager {
       case "Wise Fish":
         fish.customPickup.gameObject.AddComponent<BookRandomizer>();
         break;
-      case "Wine Fish":
+      case "Poisson de Vin":
         fish.worldObject.transform.Find("Liquid").gameObject.AddComponent<Liquid>();
         break;
       case "NaN":
