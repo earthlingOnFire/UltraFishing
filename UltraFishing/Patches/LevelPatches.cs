@@ -249,14 +249,12 @@ public static class LevelPatches
                 WaterBuilder.SetWater("B1-D Lava Hallway/B1-D Nonstuff/Lava/Cube-clone")
                   .AddFish("Overcooked Fish")
                   .SetUp("Lava", Color.red);
-                Plugin.logger.LogError("TEST 1 PASS");
                 foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform)
                 {
                     WaterBuilder.SetWater(objects.gameObject)
                       .AddFish("null")
-                      .SetUp("Waterfall", Color.magenta);
+                      .SetUp("Waterfall Pool", Color.magenta);
                 }
-                Plugin.logger.LogError("TEST 2 PASS");
 
                 foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform)
                 {
@@ -264,7 +262,6 @@ public static class LevelPatches
                       .AddFish("Nil")
                       .SetUp("Stream", Color.magenta);
                 }
-                Plugin.logger.LogError("TEST 3 PASS");
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -278,11 +275,10 @@ public static class LevelPatches
                     {
                         WaterBuilder.SetWater("R1 - Courtyard/R1 Nonstuff/Decorations/Water", i)
                       .AddFish("Nil")
-                      .SetUp("Stream", Color.magenta);
+                      .SetUp("Aquaduct", Color.magenta);
                     }
 
                 }
-                Plugin.logger.LogError("TEST 4 PASS");
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -293,7 +289,6 @@ public static class LevelPatches
                           .SetUp("Waterfall", Color.magenta);
                     }
                 }
-                Plugin.logger.LogError("TEST 5 PASS");
 
                 WaterBuilder.SetWater("B2 -> B2-B Water/Water/Cube (2)/", 0)
                   .AddFish("Nil")
@@ -342,7 +337,7 @@ public static class LevelPatches
             case "Level 2-2":
                 WaterBuilder.SetWater("1 - First District/1 Nonstuff/Floor/Plane/Cube/")
                   .AddFish("Vapor Fish")
-                  .SetUp("Stream", Color.cyan);
+                  .SetUp("Canal", Color.cyan);
                 for (int i = 0; i < GenericHelper.FindGameObject("5 - Second District/5 Nonstuff/Water/Colliders").transform.childCount; i++)
                 {
                     if (i > 1 && i < 6)
@@ -355,15 +350,22 @@ public static class LevelPatches
                     {
                         WaterBuilder.SetWater("5 - Second District/5 Nonstuff/Water/Colliders/", i)
                           .AddFish("Vapor Fish")
-                          .SetUp("Stream", Color.cyan);
+                          .SetUp("Canal", Color.cyan);
                     }
                 }
 
                 break;
             case "Level 2-3":
-                WaterBuilder.SetWater("1 - Main Hall/1 Nonstuff/Water/", 3)
-                  .AddFish("Koi Fish")
+                foreach (Transform child in GenericHelper.FindGameObject("1 - Main Hall/1 Nonstuff/Water/").transform)
+                {
+                    if (child.name.Contains("Cube"))
+                    {
+                        WaterBuilder.SetWater(child)
+                                              .AddFish("Koi Fish")
                   .SetUp("Pond", Color.magenta);
+                    }
+                }
+
                 /*WaterBuilder.SetWater("5 - Final Arena/5 Nonstuff/Water (Controlled)/")*/
                 /*  .AddFish("")*/
                 /*  .SetUp("", Color.magenta);*/
