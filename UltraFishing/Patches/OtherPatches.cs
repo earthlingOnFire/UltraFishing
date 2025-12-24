@@ -7,6 +7,19 @@ namespace UltraFishing;
 public static class OtherPatches {
 
   [HarmonyPostfix]
+  [HarmonyPatch(typeof(Glass), "Shatter")]
+  private static void Glass_Shatter_Postfix(Glass __instance) {
+    if (SceneHelper.CurrentScene != "Level 0-1" && SceneHelper.CurrentScene != "Level 0-2") return;
+    
+    BoxCollider[] boxColliders = __instance.gameObject.GetComponents<BoxCollider>();
+    if (boxColliders == null) return;
+
+    foreach(var col in boxColliders) {
+      col.enabled = false;
+    }
+  }
+
+  [HarmonyPostfix]
   [HarmonyPatch(typeof(FishManager), "UnlockFish")]
   private static void FishManager_UnlockFish_Postfix(ref FishObject fish) {
     GlobalFishManager.UnlockFish(fish);
