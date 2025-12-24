@@ -25,7 +25,7 @@ public class Plugin : BaseUnityPlugin {
   public static GameObject baitConsumedSound;
   public static GameObject terminal;
   private static Shader MainShader;
-  public static readonly string[] NoRodLevels = [ "Level 1-S" ];
+  public static readonly string[] NoRodLevels = [ "Level 1-S", "Level 2-S", "Level 0-S", "Level 4-S" ];
 
   private void Awake() {
     MainShader = Addressables.LoadAssetAsync<Shader>("Assets/Shaders/MasterShader/ULTRAKILL-Standard.shader").WaitForCompletion();
