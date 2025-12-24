@@ -7,5 +7,6 @@
 - Fixed visual issues related to shaders.
 - Added a draw animation for the fishing rod.
 - Removed fishing entirely from some levels.
+- Added custom splash effects for some fishing spots.
 - Fixed size 2 fish.
 </details>

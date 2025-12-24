@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public static class OtherPatches {
   [HarmonyPostfix]
   [HarmonyPatch(typeof(Glass), "Shatter")]
   private static void Glass_Shatter_Postfix(Glass __instance) {
-    if (SceneHelper.CurrentScene != "Level 0-1" && SceneHelper.CurrentScene != "Level 0-2") return;
+    List<string> levels = new List<string>(new string[] {"Level 0-1", "Level 0-2", "Level 1-E"});
+    if (!levels.Exists(s => s == SceneHelper.CurrentScene)) return;
     
     BoxCollider[] boxColliders = __instance.gameObject.GetComponents<BoxCollider>();
     if (boxColliders == null) return;

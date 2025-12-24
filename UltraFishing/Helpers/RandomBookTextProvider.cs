@@ -27,29 +27,44 @@ Congratulations on finding the secret <color=blue>ULTRAFISHING</color> credits b
 
 Someone told me it'd be cool to have something like this in the dev museum, so thanks for the idea.
 
-If anyone other than me ends up making major contributions to the mod, I will credit them here.
+<b><color=orange>earthling on fire</color> - ORIGINAL CREATOR OF <color=blue>ULTRAFISHING</color></b>
 
-<b><color=orange>earthling on fire</color> - CREATOR OF <color=blue>ULTRAFISHING</color></b>
-
-This mod took a very long time to make, and development went on hiatus multiple times. But somehow, I managed to finish it.
+This mod took a very long time to make, and development went on hiatus multiple times. But somehow, I managed to release it.
 
 I learned a ton while working on this project and did a ton of stuff outside my usual "comfort zone". But most importantly, I had fun making it, and I hope you had fun playing it too.
 
 My contributions include:
 <size=18>
-- Every custom fish.
+- Every custom fish in release 1.0.
 - The fishing rod icon.
-- The code that makes this mod work.
+- Most of the code that makes this mod work.
 </size>
 <color=orange><i>"i only say morning because if it were a good morning i'd be fishing"</i></color>
+
+<b><color=green>Draghtnim</color> - DEVELOPER</b>
+
+Draghtnim joined development shortly after the initial release of the mod. He didn't like how the melted fish looked like, so he made his own revamped version and sent it to me. After that, he just started making new fishes for the mod and before I knew it he was a proper developer on the mod. 
+
+Unlike me, he has a ton of experience with Rude editor, so if you see anything that looks good, it was probably made by him. 
+
+Also make sure to check out his mods as well. Did you know <color=red>deltaKILL</color> is compatible with <color=blue>ULTRAFISHING</color>?
+
+His contributions include:
+<size=18>
+- Every custom fish for release 2.0.
+- The revamped versions of the older fishes and some revamped icons.
+- Anything that has to do with shaders, including fixing the visual bugs of the initial release.
+- The fishing rod draw animation.
+- A ton of fishing spots.
+- Some of the programming.
+</size>
+<color=green><i>"how in the fuck did I develop half the fish I was just annoyed about the melted fish"</i></color>
 
 <b>SPECIAL THANKS</b>
 
 COOL PEOPLE ON DISCORD - advice, feedback and suggestions
 
 POOT MAN - playtesting
-
-DRAGHTNIM - melted the fish in higher detail
 
 PITR - really robust fishing code that was surprisingly easy to work with
 

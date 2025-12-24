@@ -74,7 +74,7 @@ public class GlobalFishEncyclopedia : FishEncyclopedia {
   }
 
   public void NextPage() {
-    Plugin.logger.LogInfo($"Button pressed! Current page is {currentPage}");
+    // Plugin.logger.LogInfo($"Button pressed! Current page is {currentPage}");
     if (currentPage + 1 < pageIndices.Count) {
       currentPage++;
       DisplayCurrentPage();

@@ -24,10 +24,10 @@ public class LateSetWater : MonoBehaviour {
   void OnEnable() {
     if (triggered == false) {
       foreach (var child in Water) {
-        Plugin.logger.LogWarning($"Currently adding to: {child.name}");
+        // Plugin.logger.LogWarning($"Currently adding to: {child.name}");
 
         WaterBuilder.SetWater(child.transform).AddFishes(Fish).SetUp(WaterName, color);
-        Plugin.logger.LogWarning("Completed loop");
+        // Plugin.logger.LogWarning("Completed loop");
       }
 
       triggered = true;

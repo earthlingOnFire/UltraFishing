@@ -120,7 +120,7 @@ public static class GlobalFishManager {
       return;
     }
 
-    Plugin.logger.LogInfo($"Fish {fish.fishName} was found!");
+    // Plugin.logger.LogInfo($"Fish {fish.fishName} was found!");
     FishData fishData = fishes[fish.fishName];
 
     fishData.Unlock();

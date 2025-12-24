@@ -15,7 +15,7 @@ namespace UltraFishing;
 public class Plugin : BaseUnityPlugin {	
   public const string PLUGIN_GUID = "com.earthlingOnFire.UltraFishing";
   public const string PLUGIN_NAME = "UltraFishing";
-  public const string PLUGIN_VERSION = "1.0.0";
+  public const string PLUGIN_VERSION = "2.0.0";
   public static AssetBundle bundle;
   public static ManualLogSource logger;
   public static string modDir;
@@ -176,11 +176,13 @@ public class Plugin : BaseUnityPlugin {
         "assets/bundles/fishingstuff/splashes/Electricity_FishingBaitSplash1.prefab",
         "assets/bundles/fishingstuff/splashes/Sand_FishingBaitSplash.prefab",
         "assets/bundles/fishingstuff/splashes/book/Book_FishingBaitSplash.prefab",
+        "assets/bundles/fishingstuff/splashes/BottleSplash.prefab",
       };
       WaterBuilder.customSplashes.Add("None", bundle.LoadAsset<GameObject>(splashes[0]));
       WaterBuilder.customSplashes.Add("Electricity", bundle.LoadAsset<GameObject>(splashes[1]));
       WaterBuilder.customSplashes.Add("Sand", bundle.LoadAsset<GameObject>(splashes[2]));
       WaterBuilder.customSplashes.Add("Books", bundle.LoadAsset<GameObject>(splashes[3]));
+      WaterBuilder.customSplashes.Add("Bottles", bundle.LoadAsset<GameObject>(splashes[4]));
     }
   }
 }

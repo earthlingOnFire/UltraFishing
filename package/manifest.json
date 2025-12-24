@@ -1,6 +1,6 @@
 {
     "name": "UltraFishing",
-    "version_number": "1.0.0",
+    "version_number": "2.0.0",
     "website_url": "https://github.com/earthlingOnFire/UltraFishing",
     "description": "Adds a permanent fishing rod to your arsenal and new fishes to discover!",
     "dependencies": [
