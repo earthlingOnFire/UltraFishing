@@ -78,7 +78,6 @@ public static class LevelPatches {
   private static void SetupWaters() {
     switch (SceneHelper.CurrentScene) {
       case "uk_construct":
-
         WaterBuilder.SetWater("Water Tri")
           .AddFish("Funny Stupid Fish (Friend)")
           .AddFish("PITR Fish")
@@ -121,52 +120,52 @@ public static class LevelPatches {
         break;
       case "Level 0-1":
         WaterBuilder.SetWater("6 - Glass Hallway/6 Nonstuff/Grinders/Pit/")
-
           .AddFish("Scraphead Fish")
-          .SetUp("Grinder", Color.red);
+          .SetSplash("None")
+          .SetUp("Grinders", Color.red);
         break;
       case "Level 0-2":
         WaterBuilder.SetWater("3 - Blood Room/3 Nonstuff/Decorations/Mulchflow")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("3 - Blood Room/Grinders/Pit/")
-
           .AddFish("Scraphead Fish")
-          .SetUp("Grinder", Color.red);
+          .SetSplash("None")
+          .SetUp("Grinders", Color.red);
         WaterBuilder.SetWater("2 - Crusher Hallway/Grinders/Pit/")
-
           .AddFish("Scraphead Fish")
-          .SetUp("Grinder", Color.red);
+          .SetSplash("None")
+          .SetUp("Grinders", Color.red);
         WaterBuilder.SetWater("7B - Bonus Platforming/Grinders (2)/Pit/")
-
           .AddFish("Scraphead Fish")
-          .SetUp("Grinder", Color.red);
+          .SetSplash("None")
+          .SetUp("Grinders", Color.red);
         WaterBuilder.SetWater("3 - Blood Room/3 Nonstuff/Decorations/Mulchflow/Cube")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("3 - Blood Room/3 Nonstuff/Decorations/Mulchflow (1)")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("3 - Blood Room/3 Nonstuff/Decorations/Mulchflow (1)/Cube")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("6 - Crusher Arena/6 Nonstuff/Floor", 4)
           .AddFish("Filthy Screaming Fish (Filsh)")
           .AddMeshCollider()
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("7 - Crusher Hallway/7 Nonstuff/Floor/Blood/")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         foreach (int childIndex in new int[] { 0, 1, 3, 5, 7 }) {
           WaterBuilder.SetWater("9-9B Tunnel/BloodRiver/", childIndex)
             .AddFish("Filthy Screaming Fish (Filsh)")
-            .SetUp("Meat", Color.red);
+            .SetUp("Mulchflow", Color.red);
         }
         break;
       case "Level 0-3":
         GameObject wires = Plugin.bundle.LoadAsset<GameObject>(
             "assets/bundles/fishingstuff/level prefabs/Fishspots1.prefab"
-            );
+        );
         GameObject wiresClone = Object.Instantiate(wires);
         foreach (Transform child in wiresClone.transform) {
           WaterBuilder.SetWater(child.gameObject)
@@ -175,7 +174,6 @@ public static class LevelPatches {
             .SetUp("Wire", Color.yellow);
           child.gameObject.GetComponent<FakeWater>().overrideFishingPoint = child.GetChild(0);
         }
-
         break;
       case "Level 0-5":
         WaterBuilder.SetWater("2 - Lava Foundry/Lava/", 0)
@@ -186,16 +184,15 @@ public static class LevelPatches {
           .SetUp("Lava", Color.red);
         break;
       case "Level 1-1":
-
-        WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Ground/Cube/")
-          .AddFish("Nil")
-          .SetUp("Steam", Color.magenta);
         WaterBuilder.SetWater("6 - Waterfall Arena/6 Nonstuff/Cliff and Waterfall", 0, "GameObject")
           .AddFish("null")
           .SetUp("Waterfall", Color.magenta);
         WaterBuilder.SetWater("6 - Waterfall Arena/6 Nonstuff/Cliff and Waterfall", 2, "GameObject")
           .AddFish("null")
           .SetUp("Waterfall", Color.magenta);
+        WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Ground/Cube/")
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
         // shitty fix for deltakill compat
         GameObject fountain = GenericHelper.FindGameObject("1 - First Field/1 Stuff/1 - Darker_Fountain(Clone)/fountain/Cylinder (1)");
         if (fountain == null) {
@@ -206,79 +203,30 @@ public static class LevelPatches {
           .SetUp("Fountain", Color.cyan);
         break;
       case "Level 1-2":
+        WaterBuilder.SetWater("7B - Lava Room/Floor/Lava/")
+          .AddFish("Overcooked Fish")
+          .SetUp("Lava", Color.red);
+        foreach (Transform objects in GenericHelper.FindGameObject("7 - Castle Entrance/7 Nonstuff/Sewer/Water").transform) {
+          WaterBuilder.SetWater(objects.gameObject)
+            .AddFish("null")
+            .SetUp("Sewer", Color.magenta);
+        }
         WaterBuilder.SetWater("5 - Double Hallway/5 Nonstuff/Floor/", 8)
           .AddFish("Nil")
-          .SetUp("Stream", Color.magenta);
-        //sewer?
+          .SetUp("Sewer Stream", Color.magenta);
+        WaterBuilder.SetWater("3 - Stairs Room/3 Nonstuff/Floor/", 7)
+          .AddFish("Nil")
+          .SetUp("Sewer", Color.magenta);
         ZoneBuilder.CreateZone()
           .SetPosition(0, -28.5f, 467.5f)
           .SetLocalScale(13, 13, 13)
           .SuggestedDistance(0.07f)
           .CustomMinDistance(1.4f);
-
-
-
-        WaterBuilder.SetWater("3 - Stairs Room/3 Nonstuff/Floor/", 7)
-          .AddFish("Nil")
-          .SetUp("Castle Water", Color.magenta);
-        foreach (Transform objects in GenericHelper.FindGameObject("7 - Castle Entrance/7 Nonstuff/Sewer/Water").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("null")
-            .SetUp("Castle Sewer", Color.magenta);
-        }
         WaterBuilder.SetWater("7 - Castle Entrance/7 Nonstuff/Sewer/GreenWater")
           .AddFish("Cancerous Fish")
           .SetUp("Cancerous Water", Color.green);
-        WaterBuilder.SetWater("7B - Lava Room/Floor/Lava/")
-          .AddFish("Overcooked Fish")
-          .SetUp("Lava", Color.red);
         break;
       case "Level 1-3":
-        foreach (Transform objects in GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform) {
-          if (objects == GenericHelper.FindGameObject("R1 - Courtyard/R1 Nonstuff/Decorations/Water").transform.GetChild(0)) {
-            WaterBuilder.SetWater(objects.gameObject)
-              .AddFish("null")
-              .SetUp("Castle Water", Color.magenta);
-          }
-          else {
-            WaterBuilder.SetWater(objects.gameObject)
-              .AddFish("NaN")
-              .SetUp("Castle Water", Color.magenta);
-          }
-
-        }
-        foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("null")
-            .SetUp("Castle Water", Color.magenta);
-        }
-        foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("Nil")
-            .SetUp("Castle Water", Color.magenta);
-        }
-        foreach (Transform objects in GenericHelper.FindGameObject("B2 -> B2-B Water/Water/").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("NaN")
-            .SetUp("Castle Water", Color.magenta);
-        }
-        foreach (Transform objects in GenericHelper.FindGameObject("B2 -> B2-B Water/Water/Cube (2)/").transform) {
-          WaterBuilder.SetWater(objects.gameObject)
-            .AddFish("NaN")
-            .SetUp("Castle Water", Color.magenta);
-        }
-        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 5)
-          .AddFish("Nil")
-          .SetUp("Castle Water", Color.magenta);
-        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 6)
-          .AddFish("Nil")
-          .SetUp("Castle Water", Color.magenta);
-        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 7)
-          .AddFish("Nil")
-          .SetUp("Castle Water", Color.magenta);
-        WaterBuilder.SetWater(GenericHelper.FindGameObject("S - Secret Fight/S Nonstuff/Water/Cube/"))
-          .AddFish("null")
-          .SetUp("Castle Water", Color.magenta);
         WaterBuilder.SetWater("R2 - Second Arena/R2 Nonstuff/Lava")
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
@@ -288,20 +236,71 @@ public static class LevelPatches {
         WaterBuilder.SetWater("B1-D Lava Hallway/B1-D Nonstuff/Lava/Cube-clone")
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
+        foreach (Transform objects in GenericHelper.FindGameObject("R3 - Final Arena/R3 Nonstuff/Water/Water (Colliders)").transform) {
+          WaterBuilder.SetWater(objects.gameObject)
+            .AddFish("null")
+            .SetUp("Waterfall", Color.magenta);
+        }
+        foreach (Transform objects in GenericHelper.FindGameObject("B2-B Stairs Hallway/B2-B Nonstuff/Water").transform) {
+          WaterBuilder.SetWater(objects.gameObject)
+            .AddFish("Nil")
+            .SetUp("Stream", Color.magenta);
+        }
+        for (int i = 0; i < 5; i++) {
+          if (i == 0 || i == 4) {
+            WaterBuilder.SetWater("R1 - Courtyard/R1 Nonstuff/Decorations/Water/Cube", i)
+              .AddFish("null")
+              .SetUp("Waterfall", Color.magenta);
+          }
+          WaterBuilder.SetWater("R1 - Courtyard/R1 Nonstuff/Decorations/Water/Cube", i)
+            .AddFish("Nil")
+            .SetUp("Stream", Color.magenta);
+        }
+        for (int i = 0; i < 4; i++) { 
+          if (i != 0) {
+            WaterBuilder.SetWater("B2 -> B2-B Water/Water/", i)
+              .AddFish("null")
+              .SetUp("Waterfall", Color.magenta);
+          }
+        }
+        WaterBuilder.SetWater("B2 -> B2-B Water/Water/Cube (2)/", 0)
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
+        WaterBuilder.SetWater("B2 -> B2-B Water/Water/Cube (2)/", 0)
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 5)
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 6)
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
+        WaterBuilder.SetWater("B2-A Water Hallway/B2-A Nonstuff/Floor/", 7)
+          .AddFish("Nil")
+          .SetUp("Stream", Color.magenta);
+        WaterBuilder.SetWater("S - Secret Fight/S Nonstuff/Water/Cube/")
+          .AddFish("NaN")
+          .SetUp("Indoor Pool", Color.magenta);
         break;
       case "Level 1-4":
+        WaterBuilder.SetWater("2 - Bridge/2 Nonstuff/Start Side/Plane/")
+          .AddFish("null")
+          .AddBoxCollider()
+          .SetUp("Waterfall", Color.magenta);
         WaterBuilder.SetWater("V2 - Arena/V2 Nonstuff/Floor/Water/")
           .AddFish("NaN")
-          .SetUp("Pond", Color.magenta);
-        WaterBuilder.SetWater("2 - Bridge/2 Nonstuff/Start Side/Plane/")
-          .AddFish("NaN")
-          .AddBoxCollider()
-          .SetUp("Pond", Color.magenta);
+          .SetUp("Small Pool", Color.magenta);
         break;
       case "Level 2-1":
+        WaterBuilder.SetWater("1 - New Opener/1 Nonstuff/Floor/Plane")
+          .AddFish("Plastic Fish")
+          .SetUp("Sewer", Color.blue);
+        WaterBuilder.SetWater("1 - New Opener/1 Nonstuff/Floor/Plane-clone")
+          .AddFish("Plastic Fish")
+          .SetUp("Sewer", Color.blue);
         GameObject hankFisher = Plugin.bundle.LoadAsset<GameObject>(
             "assets/bundles/fishingstuff/level prefabs/hankfisher 1.prefab"
-            );
+        );
         GameObject hankFisherClone = Object.Instantiate(hankFisher);
         WaterBuilder.SetWater(hankFisherClone.transform.Find("Fishpoint").gameObject)
           .AddFish("Flying Demon Fish")
@@ -315,13 +314,11 @@ public static class LevelPatches {
         for (int i = 0; i < GenericHelper.FindGameObject("5 - Second District/5 Nonstuff/Water/Colliders").transform.childCount; i++) {
           if (i > 1 && i < 6) {
             WaterBuilder.SetWater("5 - Second District/5 Nonstuff/Water/Colliders/", i)
-
               .AddFish("Plastic Fish")
               .SetUp("Sewer", Color.blue);
           }
           else {
             WaterBuilder.SetWater("5 - Second District/5 Nonstuff/Water/Colliders/", i)
-
               .AddFish("Vapor Fish")
               .SetUp("Stream", Color.cyan);
           }
@@ -385,7 +382,7 @@ public static class LevelPatches {
         foreach (Transform objects in GenericHelper.FindGameObject("Exterior Areas/1 Nonstuff/Water/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Ancient Fish")
-            .SetUp("Pond", Color.cyan);
+            .SetUp("Boiling Pool", Color.cyan);
         }
         break;
 
@@ -400,7 +397,7 @@ public static class LevelPatches {
         foreach (Transform objects in GenericHelper.FindGameObject("5 - Cerberus Room/5 Nonstuff/Water/").transform) {
           WaterBuilder.SetWater(objects.gameObject)
             .AddFish("Ancient Fish")
-            .SetUp("Pond", Color.cyan);
+            .SetUp("Warm Pond", Color.cyan);
         }
         break;
       case "Level 4-4":
@@ -423,16 +420,15 @@ public static class LevelPatches {
           .AddFish("Coin")
           .SetSplash("Sand")
           .SetUp("Sand", Color.yellow);
-
         WaterBuilder.SetWater("5 - Window Hallway/Floor/", 5)
           .AddFish("Ancient Fish")
-          .SetUp("Pond", Color.cyan);
+          .SetUp("Small Pool", Color.cyan);
         WaterBuilder.SetWater("5 - Window Hallway/Floor/", 6)
           .AddFish("Ancient Fish")
-          .SetUp("Pond", Color.cyan);
+          .SetUp("Small Pool", Color.cyan);
         WaterBuilder.SetWater("3 - Ground Floor/Secret Hall/SuperSecretActivator/")
           .AddFish("Ancient Fish")
-          .SetUp("Pond", Color.cyan);
+          .SetUp("Small Pool", Color.cyan);
         break;
       case "Level 5-1":
         WaterBuilder.SetWater("Underwaters/All Waters/Cube (3)")
@@ -466,23 +462,17 @@ public static class LevelPatches {
           .SetUp("The Ocean Styx", Color.blue);
         break;
       case "Level 5-3":
-
         WaterBuilder.CreateWater("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/")
           .SetPosition(0, -12.25f, 478.25f)
           .SetLocalScale(20, 2, 5)
           .AddFish("Wine Fish")
-          .SetUp("bar", new Color(0.54f, 0.2f, 0.65f, 1));
-
+          .SetSplash("None")
+          .SetUp("Bar", new Color(0.54f, 0.2f, 0.65f, 1));
         GameObject bar = GenericHelper.FindGameObject("Unrotated/2B1 - Lounge Bar/2B1 Nonstuff/Bar/");
         GameObject baroverride = new GameObject();
-
         baroverride.transform.parent = bar.transform.GetChild(3).transform;
-
         baroverride.transform.localPosition = new Vector3(0, 0, 0);
-
         bar.transform.GetChild(3).GetComponent<FakeWater>().overrideFishingPoint = baroverride.transform;
-
-
         break;
       case "Level 5-4":
         WaterBuilder.SetWater("Surface/Stuff/Watersurface/Cube")
@@ -535,19 +525,16 @@ public static class LevelPatches {
           .SetUp("Pool of Water", Color.white);
         WaterBuilder.SetWater("Second Section/4 - Interior Exterior/4 Nonstuff/Building/Floor 1/Water/")
           .AddFish("Mannequin Fish")
-          .SetUp("Shallow Pool of Water ", Color.white);
+          .SetUp("Shallow Pool of Water", Color.white);
         break;
-
-
       case "Level 7-2":
         //optionally, Outdoors/12 - Red Skull Trench/12 Nonstuff/Water
-        WaterBuilder.SetWater("Intro Interiors/5 - Corner Staircase/Secret/Water/")
-          .AddFish("Mannequin Fish")
-          .SetUp("Pool of Water", Color.white);
-
         WaterBuilder.SetWater("Outdoors/Decorations/Ground/Blood")
           .AddFish("Bomb Fish")
           .SetUp("The River Phlegethon", Color.black);
+        WaterBuilder.SetWater("Intro Interiors/5 - Corner Staircase/Secret/Water/")
+          .AddFish("Mannequin Fish")
+          .SetUp("Pool of Water", Color.white);
         break;
       case "Level 7-3":
         WaterBuilder.SetWater("Outdoors Areas/Geometry/5/Water/")
@@ -558,12 +545,14 @@ public static class LevelPatches {
           .SetUp("Waterfall Canal", Color.white);
         WaterBuilder.SetWater("Outdoors Areas/Geometry/10/Water/")
           .AddFish("Mannequin Fish")
-          .SetUp("Small Pond", Color.white);
+          .SetUp("Small Pool", Color.white);
         WaterBuilder.SetWater("3 - Central Plaza/3 Nonstuff/Tree Area/Cube/")
           .AddFish("Tasty Fish")
+          .SetSplash("None")
           .SetUp("Blood Tree Roots", Color.red);
         WaterBuilder.SetWater("Outdoors Areas/Geometry/9/Floor/", 2)
           .AddFish("Tasty Fish")
+          .SetSplash("None")
           .SetUp("Blood-Stained Grass", Color.red);
         foreach (Transform water in GenericHelper.FindGameObject("12 - Grand Hall/12 Nonstuff/Water/").transform) {
           WaterBuilder.SetWater(water)
@@ -571,20 +560,15 @@ public static class LevelPatches {
             .SetUp("Large Pool", Color.white);
         }
 
-
         LateSetWater late = GenericHelper.FindGameObject("12 - Grand Hall/12 Stuff/SuicideTreeHungry/BloodLeaves/BigLeaves/").AddComponent<LateSetWater>();
-
 
         late.WaterName = "Large Bloody Pool";
         late.color = Color.red;
         late.Addfish("Tasty Fish");
 
-
         foreach (Transform water in GenericHelper.FindGameObject("12 - Grand Hall/12 Nonstuff/Water/").transform) {
           late.AddObject(water);
-
         }
-
         break;
       case "Level 7-4":
         WaterBuilder.SetWater("Main/Interior/InteriorStuff/BoilingBlood")
@@ -618,41 +602,51 @@ public static class LevelPatches {
       case "Level P-1":
         WaterBuilder.SetWater("3 - Fuckatorium/3 Stuff/FleshPrisonWave/Flesh Prison/")
           .AddFish("Prime Fish")
+          .SetSplash("None")
           .SetUp("Flesh Prison", Color.black);
         break;
       case "Level P-2":
         WaterBuilder.SetWater("Shortcut/Deathzones/Deathzone")
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Scrindonguloded Souls", Color.black);
         WaterBuilder.SetWater("Shortcut/Deathzones", 2)
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Scrindonguloded Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Outside/2 - Bridge Street/Floor/Plane (2)/Plane")
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Scrongled Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Outside/2 - Bridge Street/Floor/Plane (3)/Plane (1)")
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Scrongled Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Inside/6 - Soul Tunnel/6 Nonstuff (1)/Soulwalls/Cube(Clone)")
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Damned Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Inside/6 - Soul Tunnel/6 Nonstuff (1)/Soulwalls", 2)
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Damned Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Inside/6 - Soul Tunnel/6 Nonstuff/Soulwalls/Cube(Clone)")
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Damned Souls", Color.black);
         WaterBuilder.SetWater("Main Section/Inside/6 - Soul Tunnel/6 Nonstuff/Soulwalls", 2)
           .AddFish("Metal(?) Fish")
+          .SetSplash("None")
           .SetUp("Damned Souls", Color.black);
         WaterBuilder.SetWater("Main Section/9 - Boss Arena/Boss Stuff/PrisonPhase/Flesh Prison 2/")
           .AddFish("Prime Fish")
+          .SetSplash("None")
           .SetUp("Flesh Panopticon", Color.yellow);
         break;
       case "Level 0-E":
         WaterBuilder.SetWater("6 - Crossroads/6 Nonstuff/6 Hot Only/Blood")
           .AddFish("Filthy Screaming Fish (Filsh)")
-          .SetUp("Meat", Color.red);
+          .SetUp("Mulchflow", Color.red);
         WaterBuilder.SetWater("8 - Lava Foundry/8 Hot Only/Lava (1)/Cube")
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
@@ -667,10 +661,11 @@ public static class LevelPatches {
         WaterBuilder.SetWater("1 - First Field % Skylight Hallway/1 Nonstuff/1 Lava/Cube")
           .AddFish("Overcooked Fish")
           .SetUp("Lava", Color.red);
+        //add grinders
         WaterBuilder.SetWater("4 - Bridge/4 Nonstuff/4 Unburned/Plane/")
           .AddFish("NaN")
           .AddBoxCollider()
-          .SetUp("Glitchy Pond", Color.magenta);
+          .SetUp("Glitchy Pool", Color.magenta);
         break;
     }
   }

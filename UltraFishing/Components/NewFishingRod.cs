@@ -119,7 +119,7 @@ public class NewFishingRod : FishingRodWeapon {
           Vector3 vector = approximateTargetPosition;
           bool flag = false;
           if (Physics.Raycast(vector + Vector3.up * 3f, Vector3.down, out var hitInfo, 30f)) {
-            /*Plugin.logger.LogInfo(GenericHelper.GetFullPath(hitInfo.collider.gameObject));*/
+            // Plugin.logger.LogInfo(GenericHelper.GetFullPath(hitInfo.collider.gameObject));
             vector = hitInfo.point;
             if (hitInfo.collider.TryGetComponent<Water>(out var component) && (bool)component.fishDB) {
               currentFishPool = component.fishDB;
