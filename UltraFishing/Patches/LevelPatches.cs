@@ -39,6 +39,7 @@ public static class LevelPatches {
       terminalClone = Object.Instantiate(Plugin.terminal);
       terminalClone.transform.position = new Vector3(-37, -10, 335.125f);
       terminalClone.transform.localEulerAngles = new Vector3(0, 0, 180);
+      terminalClone.transform.GetChild(3).gameObject.layer = 24; //outdoors
       return;
     }
 
