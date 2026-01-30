@@ -8,6 +8,17 @@ namespace UltraFishing;
 public static class OtherPatches {
 
   [HarmonyPostfix]
+  [HarmonyPatch(typeof(FishingHUD), "Start")]
+  private static void FishingHUD_Start_Postfix(FishingHUD __instance) {
+    foreach (FishObject fish in __instance.fishHudIcons.Keys) {
+      if (GlobalFishManager.FoundFish(fish)) {
+        __instance.fishHudIcons[fish].sprite = fish.icon;
+        __instance.fishHudIcons[fish].color = new Color(1, 1, 1, 0.5f);
+      }
+    }
+  }
+
+  [HarmonyPostfix]
   [HarmonyPatch(typeof(Glass), "Shatter")]
   private static void Glass_Shatter_Postfix(Glass __instance) {
     List<string> levels = new List<string>(new string[] {"Level 0-1", "Level 0-2", "Level 1-E"});
